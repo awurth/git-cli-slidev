@@ -25,28 +25,6 @@ L'objectif aujourd'hui c'est de vous donner des outils concrets pour aller plus 
 -->
 
 ---
-layout: default
----
-
-# Au programme
-
-<v-clicks>
-
-- **Staging sélectif** — `add -p`, `restore -p`, `stash -p`, `add -N`
-- **Diff plus lisible** — `-w`, `--color-moved`, delta, diff-so-fancy
-- **Naviguer plus vite** — `switch`, `restore`, le tiret `-`, `branch -v`
-- **Réécrire l'historique** — rebase interactif, fixup/autosquash, `git history`
-- **Travailler en parallèle** — worktrees
-- **Sécurité** — `push --force-with-lease`, rerere
-- **Aliases** — taper le moins possible
-
-</v-clicks>
-
-<!--
-On va couvrir beaucoup de terrain. Si vous ne retenez que 2-3 choses aujourd'hui, c'est déjà une victoire.
--->
-
----
 layout: section
 ---
 
