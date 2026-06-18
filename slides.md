@@ -1,7 +1,7 @@
 ---
 theme: default
 background: https://cover.sli.dev
-title: 'Git en ligne de commande : ce qu''on ne vous a pas appris'
+title: 'Apprendre à aimer Git en ligne de commande'
 info: false
 class: text-center
 transition: slide-left
@@ -9,11 +9,9 @@ comark: true
 duration: 30min
 ---
 
-# Git en ligne de commande
+# Apprendre à aimer Git en ligne de commande
 
-## Ce qu'on ne vous a pas appris
-
-Les commandes et options méconnues mais très utiles au quotidien
+Les commandes, options et réglages méconnues mais très utiles au quotidien
 
 <div class="pt-8 text-gray-400">
   Alexis Wurth · Sensiolabs
