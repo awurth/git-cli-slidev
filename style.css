@@ -1,0 +1,176 @@
+/* Git brand orange + slate palette */
+:root {
+  --git-orange: #f05033;
+  --git-orange-light: #fde5e0;
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-100: #f1f5f9;
+  --accent-blue: #3b82f6;
+}
+
+/* ── Global typography ─────────────────────────────────────── */
+
+.slidev-layout {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.slidev-layout h1 {
+  color: var(--git-orange) !important;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.slidev-layout h2 {
+  color: var(--slate-800);
+  font-weight: 600;
+}
+
+/* Inline code — !important pour battre les styles du thème */
+.slidev-layout :not(pre) > code,
+.slidev-layout p code,
+.slidev-layout li code,
+.slidev-layout td code,
+.slidev-layout th code {
+  background: #1e293b !important;
+  color: #fb923c !important;
+  padding: 0.15em 0.5em !important;
+  border-radius: 0.3em !important;
+  font-size: 0.85em !important;
+  font-weight: 500 !important;
+}
+
+/* ── Cover slide ───────────────────────────────────────────── */
+
+.slidev-layout.cover h1 {
+  color: #ffffff !important;
+  font-size: 3rem;
+  line-height: 1.1;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.slidev-layout.cover h2 {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+/* ── Section slides ────────────────────────────────────────── */
+
+.slidev-layout.section {
+  background: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 100%);
+  color: white;
+}
+
+.slidev-layout.section h1 {
+  color: #fb923c !important;
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.slidev-layout.section p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+/* ── Blockquotes ───────────────────────────────────────────── */
+
+.slidev-layout blockquote {
+  border-left: 4px solid var(--git-orange);
+  background: var(--git-orange-light);
+  padding: 0.7rem 1.1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin: 1rem 0;
+  font-style: normal;
+  color: #7c2d12;
+}
+
+.slidev-layout blockquote p {
+  margin: 0;
+}
+
+/* ── Tables ────────────────────────────────────────────────── */
+
+.slidev-layout table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9em;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.slidev-layout thead tr {
+  background: var(--slate-800);
+  color: white;
+}
+
+.slidev-layout thead th {
+  padding: 0.6rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.slidev-layout tbody tr {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.slidev-layout tbody tr:last-child {
+  border-bottom: none;
+}
+
+.slidev-layout tbody tr:nth-child(even) {
+  background: var(--slate-100);
+}
+
+.slidev-layout tbody td {
+  padding: 0.5rem 1rem;
+}
+
+/* ── Code blocks ───────────────────────────────────────────── */
+
+.slidev-layout .slidev-code {
+  border-radius: 0.6rem !important;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.slidev-layout .shiki {
+  border-radius: 0.6rem;
+}
+
+/* ── Two-cols divider ──────────────────────────────────────── */
+
+.slidev-layout.two-cols .col-right,
+.slidev-layout.two-cols-header .col-right {
+  border-left: 2px solid #e2e8f0;
+  padding-left: 1.5rem;
+}
+
+/* ── Lists ─────────────────────────────────────────────────── */
+
+.slidev-layout ul li::marker {
+  color: var(--git-orange);
+}
+
+.slidev-layout ul li {
+  margin-bottom: 0.35rem;
+}
+
+/* ── Links ─────────────────────────────────────────────────── */
+
+.slidev-layout a {
+  color: var(--git-orange);
+  text-decoration: underline;
+  text-decoration-color: rgba(240, 80, 51, 0.4);
+  text-underline-offset: 2px;
+}
+
+/* ── Emoji bullet fix ──────────────────────────────────────── */
+
+.slidev-layout li p {
+  margin: 0;
+}
