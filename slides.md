@@ -966,6 +966,63 @@ git config --global core.excludesFile ~/.gitignore_global
 -->
 
 ---
+layout: two-cols
+---
+
+# `includeIf` — config par contexte
+
+Adapter la config git selon le projet, sans tout mélanger.
+
+```bash
+# ~/.gitconfig
+[user]
+  name = Alexis Wurth
+  email = alexis@perso.dev
+
+[includeIf "gitdir:~/work/"]
+  path = ~/.gitconfig-work
+
+[includeIf "gitdir:~/Projects/sensiolabs/"]
+  path = ~/.gitconfig-sensiolabs
+```
+
+::right::
+
+<v-click>
+
+```ini
+# ~/.gitconfig-work
+[user]
+  email = alexis.wurth@sensiolabs.com
+  signingKey = ABCD1234
+
+[commit]
+  gpgSign = true
+```
+
+</v-click>
+
+<v-clicks>
+
+**Autres conditions disponibles :**
+
+| Condition | Déclencheur |
+|-----------|-------------|
+| `gitdir:~/work/` | chemin du `.git` |
+| `gitdir/i:` | idem, insensible à la casse |
+| `onbranch:release/**` | nom de branche |
+| `hasconfig:remote.*.url:` | URL du remote |
+
+> Une seule `~/.gitconfig`, comportements différents par projet.
+
+</v-clicks>
+
+<!--
+Disponible depuis git 2.13 (2017). Très utile pour séparer config perso et pro.
+Le trailing slash dans gitdir: est important : ~/work/ matche tout ce qui est dans ce dossier.
+-->
+
+---
 layout: section
 ---
 
