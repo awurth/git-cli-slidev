@@ -159,10 +159,12 @@ layout: section
 Comprendre ce qui change vraiment
 
 ---
-layout: two-cols
+layout: two-cols-header
 ---
 
 # `git diff -w` et `--color-moved`
+
+::left::
 
 **Ignorer les espaces :**
 
