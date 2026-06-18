@@ -848,6 +848,63 @@ Très utile sur les projets où une branche de feature vit longtemps en parallè
 -->
 
 ---
+layout: two-cols-header
+---
+
+# `merge.conflictStyle zdiff3`
+
+Mieux comprendre les conflits grâce au contexte ancêtre.
+
+::left::
+
+**Style par défaut (`merge`) :**
+
+```
+<<<<<<< HEAD
+return $user->getEmail();
+=======
+return $user->getUsername();
+>>>>>>> feature/login
+```
+
+😕 Impossible de savoir pourquoi ça a divergé.
+
+::right::
+
+<v-click>
+
+**Avec `zdiff3` :**
+
+```
+<<<<<<< HEAD
+return $user->getEmail();
+||||||| base
+return $user->getName();
+=======
+return $user->getUsername();
+>>>>>>> feature/login
+```
+
+✅ Le bloc `|||||||` montre le code **avant** les deux modifications.
+
+</v-click>
+
+<v-click>
+
+```bash
+git config --global merge.conflictStyle zdiff3
+```
+
+Disponible depuis git 2.35 (2022). `zdiff3` améliore `diff3` en réduisant les faux conflits.
+
+</v-click>
+
+<!--
+zdiff3 = "zealous diff3". Moins de conflits parasites que diff3 classique.
+Indispensable avec rerere : la résolution est plus intelligente avec un meilleur contexte ancêtre.
+-->
+
+---
 layout: section
 ---
 
