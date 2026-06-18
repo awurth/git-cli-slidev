@@ -225,8 +225,19 @@ Parfait pour les refactorings : on voit immédiatement ce qui bouge vs ce qui ch
 
 </v-click>
 
+<v-click>
+
+**Activer par défaut :**
+
+```bash
+git config --global diff.colorMoved default
+```
+
+</v-click>
+
 <!--
 color-moved : disponible depuis git 2.15 (2017). Beaucoup de devs ne savent pas que ça existe.
+diff.colorMoved peut valoir : no, default, blocks, zebra, dimmed-zebra
 -->
 
 ---
