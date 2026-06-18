@@ -23,6 +23,21 @@ L'objectif aujourd'hui c'est de vous donner des outils concrets pour aller plus 
 -->
 
 ---
+---
+
+<div class="flex items-center gap-8 h-full">
+  <img src="/avatar.jpg" alt="Alexis Wurth" class="w-36 h-36 rounded-full object-cover ring-4 ring-gray-200 shadow-lg shrink-0" />
+  <div>
+    <h1>Alexis Wurth</h1>
+    <ul>
+      <li>Développeur PHP/Symfony chez <strong>Sensiolabs</strong></li>
+      <li>Utilisateur Git en ligne de commande au quotidien</li>
+      <li>🐙 <a href="https://github.com/awurth">awurth</a></li>
+    </ul>
+  </div>
+</div>
+
+---
 layout: section
 ---
 
