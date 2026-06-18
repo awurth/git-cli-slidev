@@ -532,6 +532,38 @@ Sur une branche de feature à plusieurs, l'auteur évite les mauvaises surprises
 </v-click>
 
 ---
+
+# `rebase.autostash`
+
+Lancer un rebase avec des modifications non commitées.
+
+```bash
+git config --global rebase.autostash true
+```
+
+<v-click>
+
+Sans autostash :
+```
+error: cannot rebase: You have unstaged changes.
+```
+
+</v-click>
+
+<v-click>
+
+Avec autostash, git fait automatiquement :
+```bash
+git stash        # avant le rebase
+# ... rebase ...
+git stash pop    # après le rebase
+```
+
+Fini les `git stash` manuels avant chaque rebase.
+
+</v-click>
+
+---
 layout: two-cols
 ---
 
