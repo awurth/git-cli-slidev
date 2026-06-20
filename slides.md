@@ -431,6 +431,7 @@ git branch -vv
 ```
   feature/auth  a3f2e1c [origin/feature/auth] Add JWT middleware
 * main          c1e9a4b [origin/main: behind 3] Merge pull request #42
+  old-feature   f2a1c3d [origin/old-feature: gone] WIP
 ```
 
 ```bash
@@ -1063,6 +1064,47 @@ Adapter la config git selon le projet, sans tout mélanger.
 <!--
 Disponible depuis git 2.13 (2017). Très utile pour séparer config perso et pro.
 Le trailing slash dans gitdir: est important : ~/work/ matche tout ce qui est dans ce dossier.
+-->
+
+---
+layout: default
+---
+
+# `fetch.prune` — Rester en sync avec le remote
+
+Les branches supprimées sur le remote restent visibles localement par défaut.
+
+```bash
+git branch -vv
+#   old-feature  f2a1c3d [origin/old-feature: gone] WIP  ← branche fantôme
+```
+
+<v-click>
+
+```bash
+# Nettoyer manuellement
+git fetch --prune
+
+# Activer en config pour que ce soit automatique à chaque fetch
+git config --global fetch.prune true
+```
+
+</v-click>
+
+<v-click>
+
+```bash
+# Idem pour les tags supprimés sur le remote
+git config --global fetch.pruneTags true
+```
+
+> `fetch.prune true` = le remote fait loi. Fini les branches fantômes.
+
+</v-click>
+
+<!--
+Sans fetch.prune, git branch -r affiche des branches supprimées indéfiniment.
+fetch.pruneTags : disponible depuis git 2.17 (2018).
 -->
 
 ---
