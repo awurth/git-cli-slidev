@@ -674,6 +674,7 @@ git rebase -i HEAD~5
 # 1. Créer un commit de correction ciblé
 git add -p
 git commit --fixup a1b2c3d
+# (--squash pour éditer le message au rebase)
 
 # Résultat dans le log :
 # a1b2c3d Ajouter le formulaire
