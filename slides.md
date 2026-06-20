@@ -233,6 +233,8 @@ Parfait pour les refactorings : on voit immédiatement ce qui bouge vs ce qui ch
 
 ```bash
 git config --global diff.colorMoved default
+# bonus : déplacé + re-indenté → toujours reconnu comme move
+git config --global diff.colorMovedWS allow-indentation-change
 ```
 
 </v-click>
