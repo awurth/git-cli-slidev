@@ -30,12 +30,14 @@ L'objectif aujourd'hui c'est de vous donner des outils concrets pour aller plus 
   <div>
     <h1>Alexis Wurth</h1>
     <ul>
-      <li>Développeur PHP/Symfony chez <strong>Sensiolabs</strong></li>
+      <li>Développeur PHP/Symfony</li>
       <li>Utilisateur Git en ligne de commande au quotidien</li>
-      <li>🐙 <a href="https://github.com/awurth">awurth</a></li>
+      <li class="flex items-center gap-2"><img src="./github.svg" class="w-5 h-5" alt="GitHub" /><a href="https://github.com/awurth">awurth</a></li>
     </ul>
   </div>
 </div>
+
+<img src="./sensiolabs.png" class="absolute bottom-10 right-12 h-14" alt="Sensiolabs" />
 
 ---
 layout: section
