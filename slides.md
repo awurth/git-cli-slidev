@@ -566,7 +566,8 @@ Par défaut, les commandes sont en toutes lettres. On peut faire mieux.
 git config --global rebase.abbreviateCommands true
 
 # Afficher l'auteur dans la liste
-git config --global rebase.instructionFormat "%s (%an)"
+# https://git-scm.com/docs/git-log#Documentation/git-log.txt-formatformat-string
+git config --global rebase.instructionFormat "[%an @ %ar] %s"
 ```
 
 <v-click>
@@ -580,9 +581,9 @@ squash c3d4e5f fix typo
 
 **Après :**
 ```
-p a1b2c3d Ajouter le formulaire de connexion (Alice)
-p b2c3d4e WIP (Bob)
-s c3d4e5f fix typo (Alice)
+p a1b2c3d [Alice @ 2 days ago] Ajouter le formulaire de connexion
+p b2c3d4e [Bob @ 5 hours ago] WIP
+s c3d4e5f [Alice @ 3 hours ago] fix typo
 ```
 
 </v-click>
