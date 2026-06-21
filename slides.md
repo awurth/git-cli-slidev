@@ -48,19 +48,18 @@ layout: section
 Committer exactement ce qu'on veut
 
 ---
-layout: two-cols
+layout: default
 ---
 
 # `git add -p`
 
-Le **mode patch** : sélectionner les hunks (gros morceaux) à indexer un par un.
+Le **mode patch** : sélectionner les hunks (gros morceaux) à indexer un par un — bugfix, refactoring, debug, sans toucher aux fichiers.
 
 ```bash
 git add -p
-git add --patch
 ```
 
-Réponses disponibles à chaque hunk :
+<v-click>
 
 | Touche | Action |
 |--------|--------|
@@ -69,22 +68,6 @@ Réponses disponibles à chaque hunk :
 | `s` | Découper en plus petits hunks |
 | `e` | Éditer manuellement |
 | `q` | Quitter |
-| `?` | Aide |
-
-::right::
-
-<v-click>
-
-Un fichier modifié peut contenir :
-- Un bugfix → à committer maintenant
-- Un refactoring → à committer séparément
-- Du debug temporaire → à ne PAS committer
-
-Séparer tout ça **sans toucher aux fichiers**.
-
-</v-click>
-
-<v-click>
 
 > 💡 `-p` fonctionne aussi avec `restore`, `stash`, `reset`, `commit`
 
@@ -131,12 +114,10 @@ Petit tip mais qui fait gagner du temps quand on a créé plusieurs nouveaux fic
 -->
 
 ---
-layout: two-cols-header
+layout: default
 ---
 
 # `git stash push` — options utiles
-
-::left::
 
 ```bash
 # Inclure les fichiers non-trackés
@@ -148,8 +129,6 @@ git stash push -m "wip: refacto contrôleur user"
 # Tout combiner
 git stash push -u -m "wip: nouvelle feature"
 ```
-
-::right::
 
 <v-click>
 
@@ -216,12 +195,10 @@ layout: section
 Comprendre ce qui change vraiment
 
 ---
-layout: two-cols-header
+layout: default
 ---
 
 # `git diff -w` et `--color-moved`
-
-::left::
 
 **Ignorer les espaces :**
 
@@ -231,28 +208,13 @@ git diff --ignore-space-change   # -b
 git diff --ignore-blank-lines    # -B
 ```
 
-Utile après un reformatage ou une correction d'indentation.
-
-::right::
-
 <v-click>
 
 **Colorier les blocs déplacés :**
 
 ```bash
-git diff --color-moved
-git diff --color-moved=blocks
-```
-
-Un bloc de code **déplacé** s'affiche en couleur distincte au lieu d'apparaître comme suppression + ajout.
-
-</v-click>
-
-<v-click>
-
-```bash
-# Combiner les deux
-git diff -w --color-moved
+git diff --color-moved           # blocs déplacés en couleur distincte
+git diff -w --color-moved        # combiner les deux
 ```
 
 Parfait pour les refactorings : on voit immédiatement ce qui bouge vs ce qui change vraiment.
@@ -265,7 +227,6 @@ Parfait pour les refactorings : on voit immédiatement ce qui bouge vs ce qui ch
 
 ```bash
 git config --global diff.colorMoved default
-# bonus : déplacé + re-indenté → toujours reconnu comme move
 git config --global diff.colorMovedWS allow-indentation-change
 ```
 
@@ -358,6 +319,8 @@ git config --global core.pager \
 Montrer une capture d'écran ou une démo si possible. L'impact visuel est immédiat.
 delta : https://github.com/dandavison/delta
 diff-so-fancy : https://github.com/so-fancy/diff-so-fancy
+
+En préparant ces slides j'ai découvert un concurrent : hunk (https://github.com/modem-dev/hunk) qui se prétend meilleur que les deux. Pas testé.
 -->
 
 ---
@@ -505,27 +468,21 @@ branch -vv révèle aussi les branches qui ont divergé du remote. Très utile e
 -->
 
 ---
-layout: two-cols-header
+layout: default
 ---
 
 # `git log` — options essentielles
-
-::left::
 
 ```bash
 # Compact + graphe de branches
 git log --oneline --graph --decorate
 
-# Limiter
+# Limiter / filtrer
 git log -10
 git log --since="2 weeks ago"
 git log --author="Alexis"
-
-# Filtrer par fichier ou dossier
 git log -- src/Controller/
 ```
-
-::right::
 
 <v-click>
 
@@ -534,10 +491,8 @@ git log -- src/Controller/
 git log -p          # avec le diff complet
 git log --stat      # fichiers modifiés + stats
 
-# Chercher dans les messages
+# Chercher et formater
 git log --grep="fix"
-
-# Format personnalisé
 git log --format="%h %an %ar %s"
 # abc1234 Alexis 2 days ago Fix login
 ```
@@ -571,24 +526,28 @@ Réécrire les N derniers commits avant de pousser.
 git rebase -i HEAD~5
 ```
 
+<v-click>
+
 ```
 pick a1b2c3d Ajouter le formulaire de connexion
 pick b2c3d4e WIP
 pick c3d4e5f fix typo
 pick d4e5f6g Ajouter les tests
-pick e5f6g7h Correction review
 ```
 
-Commandes disponibles :
+</v-click>
+
+<v-click>
 
 | Commande | Action |
 |----------|--------|
 | `pick` / `p` | Garder le commit tel quel |
 | `reword` / `r` | Modifier le message |
-| `edit` / `e` | Modifier le contenu |
 | `squash` / `s` | Fusionner avec le précédent (garder msg) |
 | `fixup` / `f` | Fusionner avec le précédent (supprimer msg) |
 | `drop` / `d` | Supprimer le commit |
+
+</v-click>
 
 <!--
 Règle d'or : ne jamais rebase ce qui est déjà sur le remote partagé.
@@ -665,43 +624,26 @@ Fini les `git stash` manuels avant chaque rebase.
 </v-click>
 
 ---
-layout: two-cols
+layout: default
 ---
 
 # fixup et autosquash
 
-Corriger un vieux commit **proprement**.
-
-**Workflow classique (laborieux) :**
-```bash
-git rebase -i HEAD~5
-# éditer manuellement, déplacer les lignes
-# changer pick en fixup
-```
-
-**Workflow avec fixup :**
+Corriger un vieux commit **proprement**, sans ouvrir le rebase à la main.
 
 ```bash
 # 1. Créer un commit de correction ciblé
 git add -p
 git commit --fixup a1b2c3d
-# (--squash pour éditer le message au rebase)
-
-# Résultat dans le log :
-# a1b2c3d Ajouter le formulaire
-# f2e1d0c fixup! Ajouter le formulaire  ← nouveau
+# Résultat : fixup! Ajouter le formulaire  ← dans le log
 ```
-
-::right::
 
 <v-click>
 
 ```bash
-# 2. Rebase avec autosquash
+# 2. Rebase avec autosquash : git place et marque automatiquement
 git rebase -i --autosquash HEAD~6
 ```
-
-Git positionne et marque automatiquement le fixup au bon endroit :
 
 ```
 pick a1b2c3d Ajouter le formulaire
@@ -913,23 +855,12 @@ git push --force   # ← Alice écrase le commit de Bob silencieusement
 
 **La solution :**
 ```bash
-git push --force-with-lease
-# Vérifie que le remote correspond à ce qu'on a fetché
+git push --force-with-lease --force-if-includes
 # Si quelqu'un a poussé entre-temps → REJET avec erreur claire
 
-# Encore plus strict (git 2.30+)
-git push --force-with-lease --force-if-includes
-
-# Ou activer --force-if-includes automatiquement
+# Activer --force-if-includes automatiquement (git 2.30+)
 git config --global push.useForceIfIncludes true
-git push --force-with-lease   # --force-if-includes implicite
-```
 
-</v-click>
-
-<v-click>
-
-```bash
 # Alias indispensable
 git config --global alias.pf "push --force-with-lease"
 git pf
@@ -1207,27 +1138,22 @@ Avec `all`, on voit exactement ce qui sera stagé.
 -->
 
 ---
-layout: two-cols
+layout: default
 ---
 
 # `includeIf` — config par contexte
 
 Adapter la config git selon le projet, sans tout mélanger.
 
-```bash
+```ini
 # ~/.gitconfig
 [user]
   name = Alexis Wurth
   email = alexis@perso.dev
 
-[includeIf "gitdir:~/work/"]
-  path = ~/.gitconfig-work
-
 [includeIf "gitdir:~/Projects/sensiolabs/"]
-  path = ~/.gitconfig-sensiolabs
+  path = ~/.gitconfig-work
 ```
-
-::right::
 
 <v-click>
 
@@ -1241,13 +1167,7 @@ Adapter la config git selon le projet, sans tout mélanger.
   gpgSign = true
 ```
 
-**Autres conditions disponibles :**
-
-| Condition | Déclencheur |
-|-----------|-------------|
-| `gitdir:~/work/` | chemin du `.git` |
-| `onbranch:release/**` | nom de branche |
-| `hasconfig:remote.*.url:` | URL du remote |
+**Autres conditions :** `gitdir:`, `onbranch:release/**`, `hasconfig:remote.*.url:`
 
 > Une seule `~/.gitconfig`, comportements différents par projet.
 
