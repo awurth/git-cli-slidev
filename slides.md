@@ -298,6 +298,37 @@ diff.colorMoved peut valoir : no, default, blocks, zebra, dimmed-zebra
 -->
 
 ---
+layout: default
+---
+
+# `diff.algorithm histogram`
+
+Meilleur algorithme de diff : résultats plus lisibles, surtout après un refactoring.
+
+```bash
+git config --global diff.algorithm histogram
+```
+
+<v-click>
+
+Myers (défaut) essaie de minimiser les lignes modifiées — peut produire des diffs contre-intuitifs.
+Histogram détecte mieux les blocs déplacés et produit des hunks plus cohérents.
+
+```bash
+# Applicable aussi ponctuellement
+git diff --diff-algorithm=histogram
+```
+
+> Pas de changement fonctionnel, juste une meilleure lisibilité. Upgrade immédiat.
+
+</v-click>
+
+<!--
+histogram : créé par JGit (Eclipse). Supérieur à patience, lui-même supérieur à myers.
+Disponible dans git depuis longtemps mais peu connu.
+-->
+
+---
 layout: two-cols
 ---
 
@@ -492,6 +523,53 @@ git branch --sort=-committerdate -v
 
 <!--
 branch -vv révèle aussi les branches qui ont divergé du remote. Très utile en équipe.
+-->
+
+---
+layout: two-cols-header
+---
+
+# `git log` — options essentielles
+
+::left::
+
+```bash
+# Compact + graphe de branches
+git log --oneline --graph --decorate
+
+# Limiter
+git log -10
+git log --since="2 weeks ago"
+git log --author="Alexis"
+
+# Filtrer par fichier ou dossier
+git log -- src/Controller/
+```
+
+::right::
+
+<v-click>
+
+```bash
+# Voir les modifications
+git log -p          # avec le diff complet
+git log --stat      # fichiers modifiés + stats
+
+# Chercher dans les messages
+git log --grep="fix"
+
+# Format personnalisé
+git log --format="%h %an %ar %s"
+# abc1234 Alexis 2 days ago Fix login
+```
+
+> L'alias `l = log --oneline --graph --decorate -20` couvre 90% des cas.
+
+</v-click>
+
+<!--
+--stat : vue rapide de l'ampleur d'un commit. Très utile en code review.
+--format : pratique pour générer des changelogs ou rapports.
 -->
 
 ---
@@ -925,6 +1003,44 @@ Compatible avec push.default = simple (défaut depuis git 2.0).
 layout: default
 ---
 
+# `pull.rebase` — éviter les merge commits parasites
+
+```bash
+git pull  # sans config = merge commit si divergence
+# → Merge branch 'main' of github.com/foo/bar  ← bruit dans l'historique
+```
+
+<v-click>
+
+```bash
+git config --global pull.rebase true
+# git pull = git fetch + git rebase
+```
+
+Historique linéaire, pas de merge commits inutiles.
+
+</v-click>
+
+<v-click>
+
+```bash
+# Variante : préserver les merges locaux intentionnels
+git config --global pull.rebase merges
+```
+
+> `true` pour la plupart des cas. `merges` si votre branche contient des merges intentionnels à conserver.
+
+</v-click>
+
+<!--
+pull.rebase true : équivalent à toujours passer --rebase à git pull.
+Combine bien avec rebase.autostash true pour ne pas bloquer sur des modifs non commitées.
+-->
+
+---
+layout: default
+---
+
 # rerere — Reuse Recorded Resolution
 
 Git mémorise les résolutions de conflits pour les rejouer automatiquement.
@@ -1021,6 +1137,13 @@ layout: section
 # Configuration
 
 Mettre en place une fois, en profiter partout
+
+<!--
+Bonus : help.autocorrect
+git config --global help.autocorrect immediate
+→ git statsu : exécute 'status' directement, sans délai ni confirmation.
+(valeur numérique = délai en dixièmes de seconde avant exécution)
+-->
 
 ---
 layout: default
@@ -1184,9 +1307,48 @@ git config --global fetch.pruneTags true
 
 </v-click>
 
+<v-click>
+
+```bash
+# Supprimer toutes les branches locales dont le remote est gone
+git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
+```
+
+</v-click>
+
 <!--
 Sans fetch.prune, git branch -r affiche des branches supprimées indéfiniment.
 fetch.pruneTags : disponible depuis git 2.17 (2018).
+-D : force la suppression même si non mergée.
+-->
+
+---
+layout: default
+---
+
+# `commit.verbose` — voir le diff dans l'éditeur
+
+Par défaut, l'éditeur de commit ne montre rien du tout.
+
+```bash
+# Ponctuellement
+git commit -v
+git commit --verbose
+```
+
+<v-click>
+
+```bash
+# Toujours actif
+git config --global commit.verbose true
+```
+
+L'éditeur affiche le diff complet sous le message — plus besoin d'un terminal séparé pour se rappeler ce qu'on committe.
+
+</v-click>
+
+<!--
+Particulièrement utile pour les commits multi-fichiers : on écrit un message précis en voyant exactement ce qui part.
 -->
 
 ---
