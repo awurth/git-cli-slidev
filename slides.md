@@ -53,7 +53,7 @@ layout: two-cols
 
 # `git add -p`
 
-Le **mode patch** : sélectionner les hunks à indexer un par un.
+Le **mode patch** : sélectionner les hunks (gros morceaux) à indexer un par un.
 
 ```bash
 git add -p
@@ -84,36 +84,15 @@ Séparer tout ça **sans toucher aux fichiers**.
 
 </v-click>
 
+<v-click>
+
+> 💡 `-p` fonctionne aussi avec `restore`, `stash`, `reset`, `commit`
+
+</v-click>
+
 <!--
 Démonstration live si possible. C'est souvent une révélation pour les devs qui ne connaissent pas.
--->
-
----
-layout: default
----
-
-# Le `-p` est partout
-
-Le mode patch existe sur plusieurs commandes.
-
-```bash
-# Indexer partiellement
-git add -p
-
-# Désindexer partiellement (unstage)
-git restore --staged -p
-
-# Annuler des modifications partiellement (dans le working tree)
-git restore -p
-
-# Stasher partiellement
-git stash -p
-```
-
-> La symétrie est intentionnelle : `-p` fait toujours la même chose, quelle que soit la commande.
-
-<!--
-restore -p sans --staged : annule dans le working tree (attention, irréversible si pas indexé)
+La symétrie est intentionnelle : -p fait toujours la même chose, quelle que soit la commande.
 -->
 
 ---
