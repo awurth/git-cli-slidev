@@ -862,6 +862,10 @@ git push --force-with-lease
 
 # Encore plus strict (git 2.30+)
 git push --force-with-lease --force-if-includes
+
+# Ou activer --force-if-includes automatiquement
+git config --global push.useForceIfIncludes true
+git push --force-with-lease   # --force-if-includes implicite
 ```
 
 </v-click>
@@ -879,6 +883,42 @@ git pf
 <!--
 force-with-lease existe depuis git 1.8.5 (2013). Pas d'excuse pour utiliser --force.
 force-if-includes : protection supplémentaire si le fetch a été fait mais pas intégré.
+push.useForceIfIncludes : active --force-if-includes automatiquement sur tous les push --force-with-lease.
+-->
+
+---
+
+# `push.autoSetupRemote`
+
+Fini le `git push -u origin HEAD` sur chaque nouvelle branche.
+
+<v-click>
+
+```bash
+# Sans le réglage
+git switch -c ma-feature
+git push   # ✗ fatal: The current branch ma-feature has no upstream branch.
+           #   To push the current branch and set the remote as upstream, use
+           #   git push --set-upstream origin ma-feature
+```
+
+</v-click>
+
+<v-click>
+
+```bash
+git config --global push.autoSetupRemote true
+
+git switch -c ma-feature
+git push   # ✓ push + tracking configuré automatiquement
+```
+
+</v-click>
+
+<!--
+Disponible depuis git 2.37 (2022).
+Équivalent à toujours passer --set-upstream, mais sans y penser.
+Compatible avec push.default = simple (défaut depuis git 2.0).
 -->
 
 ---
