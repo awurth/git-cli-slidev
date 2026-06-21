@@ -117,6 +117,41 @@ restore -p sans --staged : annule dans le working tree (attention, irréversible
 -->
 
 ---
+layout: default
+---
+
+# `git add -N` — intention d'ajouter
+
+Nouveaux fichiers **invisibles** à `git diff` par défaut.
+
+```bash
+# Nouveau fichier : git diff ne le montre pas
+touch src/new-feature.php
+git diff  # → rien
+
+# Avec -N (--intent-to-add)
+git add -N src/new-feature.php
+git diff  # → montre le fichier entier comme ajout
+```
+
+<v-click>
+
+**Utilité** : visualiser l'ensemble de ses modifications d'un coup, nouveaux fichiers inclus, avant de committer.
+
+```bash
+# Workflow courant
+git add -N .          # marquer tous les nouveaux fichiers
+git diff              # voir tout ce qui change
+git add -p            # indexer sélectivement
+```
+
+</v-click>
+
+<!--
+Petit tip mais qui fait gagner du temps quand on a créé plusieurs nouveaux fichiers.
+-->
+
+---
 layout: two-cols-header
 ---
 
@@ -191,41 +226,6 @@ git config --global alias.sw '!git stash push -u -m'
 stash.showIncludeUntracked affecte uniquement git stash show.
 stash.index = true évite de devoir taper --index à chaque pop/apply : restaure l'état staged/unstaged automatiquement.
 L'alias sw (stash work) + message rend le flux naturel : git sw "contexte", git stash pop --index.
--->
-
----
-layout: default
----
-
-# `git add -N` — intention d'ajouter
-
-Nouveaux fichiers **invisibles** à `git diff` par défaut.
-
-```bash
-# Nouveau fichier : git diff ne le montre pas
-touch src/new-feature.php
-git diff  # → rien
-
-# Avec -N (--intent-to-add)
-git add -N src/new-feature.php
-git diff  # → montre le fichier entier comme ajout
-```
-
-<v-click>
-
-**Utilité** : visualiser l'ensemble de ses modifications d'un coup, nouveaux fichiers inclus, avant de committer.
-
-```bash
-# Workflow courant
-git add -N .          # marquer tous les nouveaux fichiers
-git diff              # voir tout ce qui change
-git add -p            # indexer sélectivement
-```
-
-</v-click>
-
-<!--
-Petit tip mais qui fait gagner du temps quand on a créé plusieurs nouveaux fichiers.
 -->
 
 ---
