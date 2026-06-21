@@ -767,6 +767,7 @@ Introduites dans git 2.44 (février 2024). Vérifier disponibilité : git histor
 
 ---
 layout: section
+disabled: true
 ---
 
 # Travailler en parallèle
@@ -775,6 +776,7 @@ Plusieurs branches, sans stash ni panique
 
 ---
 layout: two-cols
+disabled: true
 ---
 
 # Worktrees
