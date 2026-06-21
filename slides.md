@@ -60,8 +60,6 @@ git add -p
 git add --patch
 ```
 
-<v-clicks>
-
 Réponses disponibles à chaque hunk :
 
 | Touche | Action |
@@ -73,20 +71,16 @@ Réponses disponibles à chaque hunk :
 | `q` | Quitter |
 | `?` | Aide |
 
-</v-clicks>
-
 ::right::
 
 <v-click>
-
-**Pourquoi c'est précieux ?**
 
 Un fichier modifié peut contenir :
 - Un bugfix → à committer maintenant
 - Un refactoring → à committer séparément
 - Du debug temporaire → à ne PAS committer
 
-`git add -p` permet de séparer tout ça **sans toucher aux fichiers**.
+Séparer tout ça **sans toucher aux fichiers**.
 
 </v-click>
 
@@ -102,8 +96,6 @@ layout: default
 
 Le mode patch existe sur plusieurs commandes.
 
-<v-clicks>
-
 ```bash
 # Indexer partiellement
 git add -p
@@ -118,13 +110,7 @@ git restore -p
 git stash -p
 ```
 
-</v-clicks>
-
-<v-click>
-
 > La symétrie est intentionnelle : `-p` fait toujours la même chose, quelle que soit la commande.
-
-</v-click>
 
 <!--
 restore -p sans --staged : annule dans le working tree (attention, irréversible si pas indexé)
@@ -138,8 +124,6 @@ layout: two-cols-header
 
 ::left::
 
-<v-clicks>
-
 ```bash
 # Inclure les fichiers non-trackés
 git stash push -u
@@ -151,11 +135,9 @@ git stash push -m "wip: refacto contrôleur user"
 git stash push -u -m "wip: nouvelle feature"
 ```
 
-</v-clicks>
-
 ::right::
 
-<v-clicks>
+<v-click>
 
 ```bash
 # Restaurer aussi l'état de l'index au pop
@@ -170,7 +152,7 @@ git stash list
 
 > Sans `--index`, `pop` restaure tout dans le working tree mais perd l'état staged/unstaged.
 
-</v-clicks>
+</v-click>
 
 <!--
 -u : évite la surprise de perdre des fichiers non-trackés quand on change de branche
@@ -185,15 +167,11 @@ layout: default
 
 Pas de config pour imposer `-u -m` par défaut → alias indispensable.
 
-<v-clicks>
-
 ```bash
 # Configs disponibles
 git config --global stash.showIncludeUntracked true  # stash show inclut les untracked
 git config --global stash.index true                 # pop/apply se comportent comme --index par défaut
 ```
-
-</v-clicks>
 
 <v-click>
 
@@ -269,22 +247,12 @@ layout: two-cols-header
 **Ignorer les espaces :**
 
 ```bash
-git diff -w
-# équivalent à :
-git diff --ignore-all-space
-```
-
-Utile après un reformatage ou une correction d'indentation.
-
-<v-click>
-
-```bash
-# Variantes plus fines
+git diff -w                      # --ignore-all-space
 git diff --ignore-space-change   # -b
 git diff --ignore-blank-lines    # -B
 ```
 
-</v-click>
+Utile après un reformatage ou une correction d'indentation.
 
 ::right::
 
@@ -374,11 +342,7 @@ git config --global core.pager \
 
 </v-click>
 
-<v-click>
-
 > Les deux transforment radicalement la lisibilité des diffs. À tester absolument.
-
-</v-click>
 
 <!--
 Montrer une capture d'écran ou une démo si possible. L'impact visuel est immédiat.
@@ -460,8 +424,6 @@ layout: default
 
 Fonctionne comme `cd -` dans le shell.
 
-<v-clicks>
-
 ```bash
 git switch feature/foo
 # ... travail ...
@@ -476,16 +438,14 @@ git merge -           # merger la branche précédente
 git rebase -          # rebaser sur la branche précédente
 ```
 
-```bash
-# Cas concret : hotfix rapide
+<!--
+Cas concret : hotfix rapide
 git switch -c hotfix/urgent
-# ... correction ...
+... correction ...
 git switch main
 git merge -           # merger hotfix depuis main
 git switch -          # retour sur sa branche de feature
-```
-
-</v-clicks>
+-->
 
 <!--
 Simple mais méconnu. Économise beaucoup de temps sur les allers-retours entre deux branches.
@@ -554,8 +514,6 @@ Réécrire les N derniers commits avant de pousser.
 git rebase -i HEAD~5
 ```
 
-<v-clicks>
-
 ```
 pick a1b2c3d Ajouter le formulaire de connexion
 pick b2c3d4e WIP
@@ -574,8 +532,6 @@ Commandes disponibles :
 | `squash` / `s` | Fusionner avec le précédent (garder msg) |
 | `fixup` / `f` | Fusionner avec le précédent (supprimer msg) |
 | `drop` / `d` | Supprimer le commit |
-
-</v-clicks>
 
 <!--
 Règle d'or : ne jamais rebase ce qui est déjà sur le remote partagé.
@@ -615,11 +571,9 @@ s c3d4e5f fix typo (Alice)
 
 </v-click>
 
-<v-click>
-
+<!--
 Sur une branche de feature à plusieurs, l'auteur évite les mauvaises surprises.
-
-</v-click>
+-->
 
 ---
 
@@ -717,6 +671,7 @@ git config --global rebase.autoSquash true
 
 ---
 layout: two-cols
+disabled: true
 ---
 
 # `rebase --onto`
@@ -787,8 +742,6 @@ layout: default
 
 Deux nouvelles commandes de haut niveau pour réécrire l'historique.
 
-<v-clicks>
-
 ```bash
 # Renommer un commit sans passer par rebase -i
 git history reword a1b2c3d
@@ -801,21 +754,15 @@ git history split a1b2c3d
 # → replace HEAD sur ce commit, vous permet de re-committer morceau par morceau
 ```
 
-</v-clicks>
-
 <v-click>
-
-**Pourquoi c'est intéressant ?**
-
-Ces commandes font la même chose que le rebase interactif mais avec une interface plus directe. `reword` en particulier évite d'ouvrir toute la liste des commits juste pour modifier un message.
 
 > Ces commandes sont encore en développement. L'API peut changer.
 
 </v-click>
 
 <!--
-Introduites dans git 2.44 (février 2024). À surveiller pour les prochaines versions.
-Vérifier disponibilité : git history --help
+reword évite d'ouvrir toute la liste des commits juste pour modifier un message — pas besoin d'ouvrir toute la liste.
+Introduites dans git 2.44 (février 2024). Vérifier disponibilité : git history --help
 -->
 
 ---
@@ -899,11 +846,10 @@ layout: default
 
 `git push --force` devrait presque toujours être remplacé.
 
-<v-clicks>
+<v-click>
 
-**Le problème avec `--force` :**
+**Le problème :**
 ```bash
-# Alice et Bob travaillent sur la même branche
 # Bob a poussé un commit pendant qu'Alice rebasait
 git push --force   # ← Alice écrase le commit de Bob silencieusement
 ```
@@ -913,15 +859,12 @@ git push --force   # ← Alice écrase le commit de Bob silencieusement
 git push --force-with-lease
 # Vérifie que le remote correspond à ce qu'on a fetché
 # Si quelqu'un a poussé entre-temps → REJET avec erreur claire
-```
 
-```bash
 # Encore plus strict (git 2.30+)
 git push --force-with-lease --force-if-includes
-# Vérifie que le remote est dans notre historique local
 ```
 
-</v-clicks>
+</v-click>
 
 <v-click>
 
@@ -954,27 +897,24 @@ git config --global rerere.enabled true
 git config --global rerere.autoUpdate true
 ```
 
-<v-clicks>
+<v-click>
 
 **Cas d'usage typique :**
 ```bash
 # Branche longue qu'on rebase régulièrement sur main
 git rebase main    # → conflit sur src/Service/Auth.php
-# Résoudre le conflit manuellement
-# rerere enregistre la résolution
+# Résoudre le conflit manuellement → rerere enregistre
 
 # La semaine suivante, même rebase
-git rebase main    # → même conflit
-# rerere rejoue automatiquement la résolution ✅
+git rebase main    # → rerere rejoue automatiquement ✅
 ```
 
 ```bash
-# Voir les résolutions enregistrées
-git rerere status
+git rerere status  # voir les résolutions enregistrées
 git rerere diff    # voir ce que rerere va appliquer
 ```
 
-</v-clicks>
+</v-click>
 
 <!--
 rerere.autoUpdate : applique la résolution ET indexe le fichier. Sans ça, il faut faire git add manuellement.
@@ -1023,15 +963,11 @@ return $user->getUsername();
 
 </v-click>
 
-<v-click>
-
 ```bash
 git config --global merge.conflictStyle zdiff3
 ```
 
 Disponible depuis git 2.35 (2022). `zdiff3` améliore `diff3` en réduisant les faux conflits.
-
-</v-click>
 
 <!--
 zdiff3 = "zealous diff3". Moins de conflits parasites que diff3 classique.
@@ -1064,33 +1000,15 @@ git config --global core.excludesFile ~/.gitignore_global
 **Contenu typique de `~/.gitignore_global` :**
 
 ```
-# macOS
-.DS_Store
-.AppleDouble
-
-# JetBrains IDE
-.idea/
-*.iml
-
-# VS Code
-.vscode/
-*.code-workspace
-
-# Vim/Neovim
-*.swp
-*.swo
-.netrwhist
-
-# Fichiers locaux
+.DS_Store        # macOS
+.idea/           # JetBrains
+.vscode/         # VS Code
+*.swp            # Vim
 *.local
 .env.local
 ```
 
-</v-click>
-
-<v-click>
-
-> Règle simple : si c'est lié à **votre machine ou votre outil**, ça va dans le global. Si c'est lié au **projet**, ça va dans le `.gitignore` du projet.
+> Si c'est lié à **votre machine ou votre outil** → global. Si c'est lié au **projet** → `.gitignore` du projet.
 
 </v-click>
 
@@ -1134,22 +1052,17 @@ Adapter la config git selon le projet, sans tout mélanger.
   gpgSign = true
 ```
 
-</v-click>
-
-<v-clicks>
-
 **Autres conditions disponibles :**
 
 | Condition | Déclencheur |
 |-----------|-------------|
 | `gitdir:~/work/` | chemin du `.git` |
-| `gitdir/i:` | idem, insensible à la casse |
 | `onbranch:release/**` | nom de branche |
 | `hasconfig:remote.*.url:` | URL du remote |
 
 > Une seule `~/.gitconfig`, comportements différents par projet.
 
-</v-clicks>
+</v-click>
 
 <!--
 Disponible depuis git 2.13 (2017). Très utile pour séparer config perso et pro.
@@ -1175,16 +1088,8 @@ git branch -vv
 # Nettoyer manuellement
 git fetch --prune
 
-# Activer en config pour que ce soit automatique à chaque fetch
+# Activer en config
 git config --global fetch.prune true
-```
-
-</v-click>
-
-<v-click>
-
-```bash
-# Idem pour les tags supprimés sur le remote
 git config --global fetch.pruneTags true
 ```
 
@@ -1211,13 +1116,9 @@ layout: default
 
 # Pourquoi des aliases ?
 
-<v-clicks>
-
 `git status` → **11 caractères**, 50 fois par jour = **550 caractères** pour rien
 
 `git s` → **5 caractères** ✅
-
-</v-clicks>
 
 <v-click>
 
@@ -1230,10 +1131,6 @@ git config --list | grep alias
 # Savoir d'où vient chaque config
 git config --list --show-origin
 ```
-
-</v-click>
-
-<v-click>
 
 > Un alias bien choisi doit se retenir en 10 secondes. S'il faut l'expliquer, il est trop cryptique.
 
@@ -1312,13 +1209,8 @@ g pf           # git push --force-with-lease
 
 </v-click>
 
-<v-click>
-
-> Certains frameworks (Oh My Zsh, Fish) incluent déjà des alias git. Vérifier avant de dupliquer.
-
-</v-click>
-
 <!--
+Oh My Zsh/Fish incluent déjà des alias git. Vérifier avant de dupliquer.
 Oh My Zsh git plugin : https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
 gst = git status, gco = git checkout, etc.
 -->
@@ -1330,35 +1222,17 @@ class: text-center
 
 # En résumé
 
+**Choisissez 2-3 choses à adopter aujourd'hui :**
+
 <v-clicks>
 
-Ces commandes existent depuis des années.
-
-La plupart des développeurs ne les connaissent pas.
+- `git add -p` — commits plus propres
+- `push --force-with-lease` — ne plus écraser le travail d'un collègue
+- `rerere.enabled` — si vous rebasez souvent
+- delta — diffs agréables à lire
+- 3-4 aliases — les commandes les plus fréquentes
 
 </v-clicks>
-
-<v-click>
-
-**Aujourd'hui, choisissez 2-3 choses à adopter :**
-
-- `git add -p` pour des commits plus propres
-- `push --force-with-lease` pour ne plus jamais écraser le travail d'un collègue
-- `rerere.enabled` si vous rebasez souvent
-- delta pour rendre les diffs agréables à lire
-- 3-4 aliases pour les commandes les plus fréquentes
-
-</v-click>
-
-<v-click>
-
-**Pour aller plus loin :**
-```bash
-git help everyday   # commandes git du quotidien
-man git-config      # toutes les options de configuration
-```
-
-</v-click>
 
 <!--
 Questions ?
