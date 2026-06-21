@@ -43,9 +43,9 @@ L'objectif aujourd'hui c'est de vous donner des outils concrets pour aller plus 
 layout: section
 ---
 
-# Staging sélectif
+# Préparer un commit
 
-Committer exactement ce qu'on veut
+Choisir exactement ce qui part dans le commit
 
 ---
 layout: default
@@ -190,9 +190,9 @@ L'alias sw (stash work) + message rend le flux naturel : git sw "contexte", git 
 layout: section
 ---
 
-# Diff plus lisible
+# Lire son dépôt
 
-Comprendre ce qui change vraiment
+Comprendre ce qui change, ce qui a changé
 
 ---
 layout: default
@@ -324,12 +324,94 @@ En préparant ces slides j'ai découvert un concurrent : hunk (https://github.co
 -->
 
 ---
+layout: default
+---
+
+# `git branch -v`
+
+Voir l'état de ses branches en un coup d'œil.
+
+```bash
+git branch -v
+```
+
+```
+  feature/auth     a3f2e1c Add JWT middleware
+  feature/search   8b4d2f0 WIP: elastic integration
+* main             c1e9a4b Merge pull request #42
+  hotfix/login     f2a1c3d Fix session timeout
+```
+
+<v-clicks>
+
+```bash
+# -vv : voir aussi le tracking remote
+git branch -vv
+```
+
+```
+  feature/auth  a3f2e1c [origin/feature/auth] Add JWT middleware
+* main          c1e9a4b [origin/main: behind 3] Merge pull request #42
+  old-feature   f2a1c3d [origin/old-feature: gone] WIP
+```
+
+```bash
+# Trier par date de dernier commit
+git branch --sort=-committerdate -v
+```
+
+</v-clicks>
+
+<!--
+branch -vv révèle aussi les branches qui ont divergé du remote. Très utile en équipe.
+-->
+
+---
+layout: default
+---
+
+# `git log` — options essentielles
+
+```bash
+# Compact + graphe de branches
+git log --oneline --graph --decorate
+
+# Limiter / filtrer
+git log -10
+git log --since="2 weeks ago"
+git log --author="Alexis"
+git log -- src/Controller/
+```
+
+<v-click>
+
+```bash
+# Voir les modifications
+git log -p          # avec le diff complet
+git log --stat      # fichiers modifiés + stats
+
+# Chercher et formater
+git log --grep="fix"
+git log --format="%h %an %ar %s"
+# abc1234 Alexis 2 days ago Fix login
+```
+
+> L'alias `l = log --oneline --graph --decorate -20` couvre 90% des cas.
+
+</v-click>
+
+<!--
+--stat : vue rapide de l'ampleur d'un commit. Très utile en code review.
+--format : pratique pour générer des changelogs ou rapports.
+-->
+
+---
 layout: section
 ---
 
-# Naviguer plus vite
+# Naviguer et corriger
 
-Moins taper, aller plus loin
+Se déplacer et réécrire l'historique
 
 ---
 layout: two-cols-header
@@ -423,96 +505,6 @@ git switch -          # retour sur sa branche de feature
 <!--
 Simple mais méconnu. Économise beaucoup de temps sur les allers-retours entre deux branches.
 -->
-
----
-layout: default
----
-
-# `git branch -v`
-
-Voir l'état de ses branches en un coup d'œil.
-
-```bash
-git branch -v
-```
-
-```
-  feature/auth     a3f2e1c Add JWT middleware
-  feature/search   8b4d2f0 WIP: elastic integration
-* main             c1e9a4b Merge pull request #42
-  hotfix/login     f2a1c3d Fix session timeout
-```
-
-<v-clicks>
-
-```bash
-# -vv : voir aussi le tracking remote
-git branch -vv
-```
-
-```
-  feature/auth  a3f2e1c [origin/feature/auth] Add JWT middleware
-* main          c1e9a4b [origin/main: behind 3] Merge pull request #42
-  old-feature   f2a1c3d [origin/old-feature: gone] WIP
-```
-
-```bash
-# Trier par date de dernier commit
-git branch --sort=-committerdate -v
-```
-
-</v-clicks>
-
-<!--
-branch -vv révèle aussi les branches qui ont divergé du remote. Très utile en équipe.
--->
-
----
-layout: default
----
-
-# `git log` — options essentielles
-
-```bash
-# Compact + graphe de branches
-git log --oneline --graph --decorate
-
-# Limiter / filtrer
-git log -10
-git log --since="2 weeks ago"
-git log --author="Alexis"
-git log -- src/Controller/
-```
-
-<v-click>
-
-```bash
-# Voir les modifications
-git log -p          # avec le diff complet
-git log --stat      # fichiers modifiés + stats
-
-# Chercher et formater
-git log --grep="fix"
-git log --format="%h %an %ar %s"
-# abc1234 Alexis 2 days ago Fix login
-```
-
-> L'alias `l = log --oneline --graph --decorate -20` couvre 90% des cas.
-
-</v-click>
-
-<!--
---stat : vue rapide de l'ampleur d'un commit. Très utile en code review.
---format : pratique pour générer des changelogs ou rapports.
--->
-
----
-layout: section
----
-
-# Réécrire l'historique
-
-Un historique propre, c'est un cadeau pour vos collègues
 
 ---
 layout: default
@@ -836,9 +828,9 @@ On ne peut pas avoir la même branche dans deux worktrees simultanément.
 layout: section
 ---
 
-# Sécurité et fiabilité
+# Collaborer en sécurité
 
-Éviter les catastrophes
+Protéger le travail de l'équipe
 
 ---
 layout: default
@@ -1047,7 +1039,7 @@ Indispensable avec rerere : la résolution est plus intelligente avec un meilleu
 layout: section
 ---
 
-# Configuration
+# Configurer son environnement
 
 Mettre en place une fois, en profiter partout
 
@@ -1252,14 +1244,6 @@ L'éditeur affiche le diff complet sous le message — plus besoin d'un terminal
 <!--
 Particulièrement utile pour les commits multi-fichiers : on écrit un message précis en voyant exactement ce qui part.
 -->
-
----
-layout: section
----
-
-# Aliases
-
-Taper le moins possible
 
 ---
 layout: default
