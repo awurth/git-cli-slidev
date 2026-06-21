@@ -1058,6 +1058,53 @@ git config --global core.excludesFile ~/.gitignore_global
 -->
 
 ---
+layout: default
+---
+
+# `status.showUntrackedFiles`
+
+Par défaut, git regroupe les fichiers non-trackés sous leur dossier parent.
+
+```bash
+$ git status
+Untracked files:
+  src/   # ← on ne voit pas ce qu'il y a dedans
+```
+
+<v-click>
+
+```bash
+git config --global status.showUntrackedFiles all
+```
+
+```bash
+$ git status
+Untracked files:
+  src/Controller/UserController.php
+  src/Repository/UserRepository.php
+  src/Entity/User.php
+```
+
+> Voir tous les fichiers, pas juste le dossier — utile avant un `git add`.
+
+</v-click>
+
+<v-click>
+
+Ou ponctuellement :
+
+```bash
+git status -u
+```
+
+</v-click>
+
+<!--
+Comportement par défaut frustrant quand on découvre un repo ou un nouveau dossier.
+Avec `all`, on voit exactement ce qui sera stagé.
+-->
+
+---
 layout: two-cols
 ---
 
