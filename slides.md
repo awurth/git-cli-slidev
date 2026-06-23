@@ -318,9 +318,9 @@ git config --global core.pager \
 - Moins de fonctionnalités
 - Rendu épuré
 
-</v-click>
-
 > Les deux transforment radicalement la lisibilité des diffs. À tester absolument.
+
+</v-click>
 
 <!--
 Montrer une capture d'écran ou une démo si possible. L'impact visuel est immédiat.
