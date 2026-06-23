@@ -23,7 +23,7 @@ pnpm run export  # Export PDF (nécessite playwright-chromium)
 2. **Diff lisible** — `diff -w`, `--color-moved`, delta, diff-so-fancy
 3. **Navigation** — `switch`/`restore` vs checkout, `-` branche précédente, `branch -v`
 4. **Historique** — rebase interactif, `abbreviateCommands`, `instructionFormat`, fixup/autosquash, `git history` (expérimental)
-5. **Parallélisme** — worktrees
+5. **Parallélisme** — worktrees *(section désactivée)*
 6. **Sécurité** — `push --force-with-lease`, rerere/rerere.autoupdate
 7. **Config** — gitignore global
 8. **Aliases** — réduire la frappe au maximum
