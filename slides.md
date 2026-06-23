@@ -586,12 +586,12 @@ Sur une branche de feature à plusieurs, l'auteur évite les mauvaises surprises
 
 ---
 
-# `rebase.autostash`
+# `rebase.autoStash`
 
 Lancer un rebase avec des modifications non commitées.
 
 ```bash
-git config --global rebase.autostash true
+git config --global rebase.autoStash true
 ```
 
 <v-click>
@@ -939,7 +939,7 @@ git config --global pull.rebase merges
 
 <!--
 pull.rebase true : équivalent à toujours passer --rebase à git pull.
-Combine bien avec rebase.autostash true pour ne pas bloquer sur des modifs non commitées.
+Combine bien avec rebase.autoStash true pour ne pas bloquer sur des modifs non commitées.
 -->
 
 ---
