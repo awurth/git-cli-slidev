@@ -725,6 +725,64 @@ Mnémotechnique : --onto <destination> <exclure-depuis> <branche>
 -->
 
 ---
+layout: two-cols
+---
+
+# `rebase --update-refs`
+
+Branches empilées, `main` avance :
+
+```
+main ── A ── A'
+         └── feat-a ── B ── C
+                              └── feat-b ── D ── E
+```
+
+Sans l'option, il faut rebaser chaque branche à la main, dans l'ordre :
+
+```bash
+git rebase main feat-a
+git rebase feat-a feat-b
+```
+
+::right::
+
+<v-click>
+
+**Avec `--update-refs`** : une seule commande depuis le sommet.
+
+```bash
+git switch feat-b
+git rebase -i --update-refs main
+```
+
+Lignes `u` insérées automatiquement :
+
+```{2}
+pick b3f1a2c Commit sur feat-a
+u refs/heads/feat-a
+pick d9e4b1f Commit sur feat-b
+pick a7c2d0e Autre commit feat-b
+```
+
+</v-click>
+
+<v-click>
+
+**Activer par défaut :**
+```bash
+git config --global rebase.updateRefs true
+```
+
+⚠️ Peut capturer des branches inattendues — vérifier les lignes `u` dans l'éditeur.
+
+</v-click>
+
+<!--
+Git 2.38+. Idéal pour les stacked PRs.
+-->
+
+---
 layout: default
 ---
 
