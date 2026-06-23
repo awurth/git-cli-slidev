@@ -84,7 +84,7 @@ layout: default
 
 # `git add -N` — intention d'ajouter
 
-Nouveaux fichiers **invisibles** à `git diff` par défaut.
+Nouveaux fichiers **invisibles** à `git diff` et `git add -p` par défaut.
 
 ```bash
 # Nouveau fichier : git diff ne le montre pas
@@ -109,8 +109,15 @@ git add -p            # indexer sélectivement
 
 </v-click>
 
+<v-click>
+
+💡 **Alias utile** : `git ap = !git add -N . && git add -p`
+
+</v-click>
+
 <!--
 Petit tip mais qui fait gagner du temps quand on a créé plusieurs nouveaux fichiers.
+L'alias ap combine les deux étapes du workflow courant en une seule commande.
 -->
 
 ---
