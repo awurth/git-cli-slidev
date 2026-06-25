@@ -450,7 +450,7 @@ git checkout abc123 -- src/foo.php
 
 <v-click>
 
-**Maintenant (git 2.23+)**
+**Maintenant (git 2.23+, 2019)**
 
 ```bash
 # Changer de branche
@@ -795,7 +795,7 @@ layout: default
 
 # `git history` — commandes expérimentales
 
-<div class="text-orange-400 font-bold mb-4">⚠️ Expérimental — git 2.44+ requis</div>
+<div class="text-orange-400 font-bold mb-4">⚠️ Expérimental — git 2.54+ requis (2026)</div>
 
 Deux nouvelles commandes de haut niveau pour réécrire l'historique.
 
@@ -819,7 +819,7 @@ git history split a1b2c3d
 
 <!--
 reword évite d'ouvrir toute la liste des commits juste pour modifier un message — pas besoin d'ouvrir toute la liste.
-Introduites dans git 2.44 (février 2024). Vérifier disponibilité : git history --help
+Introduites dans git 2.54 (2026). Vérifier disponibilité : git history --help
 -->
 
 ---
@@ -918,7 +918,7 @@ git push --force   # ← Alice écrase le commit de Bob silencieusement
 git push --force-with-lease --force-if-includes
 # Si quelqu'un a poussé entre-temps → REJET avec erreur claire
 
-# Activer --force-if-includes automatiquement (git 2.30+)
+# Activer --force-if-includes automatiquement (git 2.30+, 2020)
 git config --global push.useForceIfIncludes true
 
 # Alias indispensable
