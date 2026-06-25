@@ -353,6 +353,9 @@ git branch -vv
 ```bash
 # Trier par date de dernier commit
 git branch --sort=-committerdate -v
+
+# Activer par défaut
+git config --global branch.sort -committerdate
 ```
 
 </v-clicks>
