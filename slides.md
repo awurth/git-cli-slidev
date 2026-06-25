@@ -334,6 +334,7 @@ git branch -v
   feature/search   8b4d2f0 WIP: elastic integration
 * main             c1e9a4b Merge pull request #42
   hotfix/login     f2a1c3d Fix session timeout
+  old-feature      f2a1c3d [gone] WIP
 ```
 
 <v-clicks>
