@@ -200,80 +200,6 @@ layout: section
 Comprendre ce qui change, ce qui a changé
 
 ---
-layout: default
----
-
-# `git diff -w` et `--color-moved`
-
-**Ignorer les espaces :**
-
-```bash
-git diff -w                      # --ignore-all-space
-git diff --ignore-space-change   # -b
-git diff --ignore-blank-lines    # -B
-```
-
-<v-click>
-
-**Colorier les blocs déplacés :**
-
-```bash
-git diff --color-moved           # blocs déplacés en couleur distincte
-git diff -w --color-moved        # combiner les deux
-```
-
-Parfait pour les refactorings : on voit immédiatement ce qui bouge vs ce qui change vraiment.
-
-</v-click>
-
-<v-click>
-
-**Activer par défaut :**
-
-```bash
-git config --global diff.colorMoved default
-git config --global diff.colorMovedWS allow-indentation-change
-```
-
-</v-click>
-
-<!--
-color-moved : disponible depuis git 2.15 (2017). Beaucoup de devs ne savent pas que ça existe.
-diff.colorMoved peut valoir : no, default, blocks, zebra, dimmed-zebra
--->
-
----
-layout: default
----
-
-# `diff.algorithm histogram`
-
-Meilleur algorithme de diff : résultats plus lisibles, surtout après un refactoring.
-
-```bash
-git config --global diff.algorithm histogram
-```
-
-<v-click>
-
-Myers (défaut) essaie de minimiser les lignes modifiées — peut produire des diffs contre-intuitifs.
-Histogram détecte mieux les blocs déplacés et produit des hunks plus cohérents.
-
-```bash
-# Applicable aussi ponctuellement
-git diff --diff-algorithm=histogram
-```
-
-> Pas de changement fonctionnel, juste une meilleure lisibilité. Upgrade immédiat.
-
-</v-click>
-
-<!--
-histogram : créé par JGit (Eclipse). Supérieur à patience, lui-même supérieur à myers.
-Disponible dans git depuis longtemps mais peu connu.
--->
-
----
 layout: two-cols
 ---
 
@@ -326,6 +252,69 @@ delta : https://github.com/dandavison/delta
 diff-so-fancy : https://github.com/so-fancy/diff-so-fancy
 
 En préparant ces slides j'ai découvert un concurrent : hunk (https://github.com/modem-dev/hunk) qui se prétend meilleur que les deux. Pas testé.
+-->
+
+---
+layout: default
+---
+
+# `--color-moved`
+
+Colorier les blocs déplacés en couleur distincte — parfait pour les refactorings.
+
+```bash
+git diff --color-moved           # blocs déplacés en couleur distincte
+git diff -w --color-moved        # ignorer les espaces en plus
+```
+
+<v-click>
+
+**Activer par défaut :**
+
+```bash
+git config --global diff.colorMoved default
+git config --global diff.colorMovedWS allow-indentation-change
+```
+
+On voit immédiatement ce qui bouge vs ce qui change vraiment.
+
+</v-click>
+
+<!--
+color-moved : disponible depuis git 2.15 (2017). Beaucoup de devs ne savent pas que ça existe.
+diff.colorMoved peut valoir : no, default, blocks, zebra, dimmed-zebra
+-w / --ignore-all-space : utile ponctuellement pour ignorer le bruit d'indentation.
+-->
+
+---
+layout: default
+---
+
+# `diff.algorithm histogram`
+
+Meilleur algorithme de diff : résultats plus lisibles, surtout après un refactoring.
+
+```bash
+git config --global diff.algorithm histogram
+```
+
+<v-click>
+
+Myers (défaut) essaie de minimiser les lignes modifiées — peut produire des diffs contre-intuitifs.
+Histogram détecte mieux les blocs déplacés et produit des hunks plus cohérents.
+
+```bash
+# Applicable aussi ponctuellement
+git diff --diff-algorithm=histogram
+```
+
+> Pas de changement fonctionnel, juste une meilleure lisibilité. Upgrade immédiat.
+
+</v-click>
+
+<!--
+histogram : créé par JGit (Eclipse). Supérieur à patience, lui-même supérieur à myers.
+Disponible dans git depuis longtemps mais peu connu.
 -->
 
 ---
