@@ -1036,6 +1036,8 @@ git rerere diff    # voir ce que rerere va appliquer
 <!--
 rerere.autoUpdate : applique la résolution ET indexe le fichier. Sans ça, il faut faire git add manuellement.
 Très utile sur les projets où une branche de feature vit longtemps en parallèle de main.
+
+Si vous avez souvent des conflits difficiles à gérer lors des rebases, regardez aussi du côté de `git rebase --onto` : ça permet de rebaser uniquement une partie d'une branche, et d'éviter de rejouer des conflits liés à des commits qui n'ont rien à voir avec ce qu'on veut intégrer.
 -->
 
 ---
