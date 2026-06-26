@@ -1080,13 +1080,13 @@ return $user->getUsername();
 
 ✅ Le bloc `|||||||` montre le code **avant** les deux modifications.
 
-</v-click>
-
 ```bash
 git config --global merge.conflictStyle zdiff3
 ```
 
 Disponible depuis git 2.35 (2022). `zdiff3` améliore `diff3` en réduisant les faux conflits.
+
+</v-click>
 
 <!--
 zdiff3 = "zealous diff3". Moins de conflits parasites que diff3 classique.
