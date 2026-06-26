@@ -388,19 +388,24 @@ git log -- src/Controller/
 git log -p          # avec le diff complet
 git log --stat      # fichiers modifiés + stats
 
-# Chercher et formater
+# Chercher dans les messages
 git log --grep="fix"
-git log --format="%h %an %ar %s"
-# abc1234 Alexis 2 days ago Fix login
-```
 
-> L'alias `l = log --oneline --graph --decorate -20` couvre 90% des cas.
+# Chercher dans le contenu des commits
+git log -S "password"        # commits où "password" apparaît/disparaît
+git log -G "password.*hash"  # commits dont le diff matche la regex
+```
 
 </v-click>
 
 <!--
 --stat : vue rapide de l'ampleur d'un commit. Très utile en code review.
 --format : pratique pour générer des changelogs ou rapports.
+-S (pickaxe) : cherche les commits qui ont ajouté ou supprimé la chaîne exacte — idéal pour retrouver quand une fonction a été introduite ou supprimée.
+-G : comme -S mais avec une regex sur le contenu du diff — plus puissant, légèrement plus lent.
+Les deux peuvent être lents sur un gros dépôt : limiter avec --since, -n ou -- path/ pour réduire le scope.
+-L :début,fin:fichier — suit l'historique d'une plage de lignes ou d'une fonction précise. Ex: git log -L :maFonction:src/Foo.php
+--follow : suit l'historique d'un fichier à travers les renommages. Ex: git log --follow src/Foo.php
 -->
 
 ---
