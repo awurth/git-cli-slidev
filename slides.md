@@ -14,7 +14,7 @@ duration: 30min
 Les commandes, options et réglages méconnues mais très utiles au quotidien
 
 <div class="pt-8 text-gray-400">
-  Alexis Wurth · Sensiolabs
+  Alexis Wurth · SensioLabs
 </div>
 
 <!--
@@ -34,7 +34,7 @@ L'objectif aujourd'hui c'est de vous donner des outils concrets pour aller plus 
   </div>
 </div>
 
-<img src="./sensiolabs.png" class="absolute bottom-10 right-12 h-14" alt="Sensiolabs" />
+<img src="./sensiolabs.png" class="absolute bottom-10 right-12 h-14" alt="SensioLabs" />
 <img src="./qr-slides.png" class="absolute bottom-10 left-12 h-14" alt="Slides" />
 
 ---
