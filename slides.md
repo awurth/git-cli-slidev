@@ -49,6 +49,70 @@ Choisir exactement ce qui part dans le commit
 layout: default
 ---
 
+# `git stash push` — options utiles
+
+```bash
+# Inclure les fichiers non-trackés
+git stash push -u
+
+# Nommer son stash
+git stash push -m "wip: refacto contrôleur user"
+
+# Tout combiner
+git stash push -u -m "wip: nouvelle feature"
+```
+
+<v-click>
+
+```bash
+# git stash list — les noms rendent la liste lisible
+stash@{0}: On main: wip: refacto contrôleur user
+stash@{1}: On main: wip: nouvelle feature
+# Sans -m → stash@{2}: WIP on main: abc1234 fix login
+```
+
+</v-click>
+
+<!--
+-u : évite la surprise de perdre des fichiers non-trackés quand on change de branche
+Nommer ses stashs = indispensable dès qu'on en accumule plusieurs
+-->
+
+---
+layout: default
+---
+
+# `git stash pop` — restaurer l'état exact
+
+```bash
+# Restaurer aussi l'état staged/unstaged
+git stash pop --index
+
+# Ou en config pour ne jamais y penser
+git config --global stash.index true
+```
+
+> `stash.index true` = `--index` automatique à chaque pop/apply.
+
+<v-click>
+
+```bash
+# Alias — ne plus jamais oublier -u et -m
+git config --global alias.sw '!git stash push -u -m'
+# Usage : git sw "wip: ma feature"
+```
+
+</v-click>
+
+<!--
+stash.index = true évite de devoir taper --index à chaque pop/apply : restaure l'état staged/unstaged automatiquement.
+L'alias sw (stash work) rend le flux naturel : git sw "contexte", git stash pop.
+-->
+
+---
+layout: default
+---
+
 # `git add -p`
 
 Le **mode patch** : sélectionner les hunks (gros morceaux) à indexer un par un — bugfix, refactoring, debug, sans toucher aux fichiers.
@@ -116,79 +180,6 @@ git add -p            # indexer sélectivement
 <!--
 Petit tip mais qui fait gagner du temps quand on a créé plusieurs nouveaux fichiers.
 L'alias ap combine les deux étapes du workflow courant en une seule commande.
--->
-
----
-layout: default
----
-
-# `git stash push` — options utiles
-
-```bash
-# Inclure les fichiers non-trackés
-git stash push -u
-
-# Nommer son stash
-git stash push -m "wip: refacto contrôleur user"
-
-# Tout combiner
-git stash push -u -m "wip: nouvelle feature"
-```
-
-<v-click>
-
-```bash
-# Restaurer aussi l'état de l'index au pop
-git stash pop --index
-# (fichiers qui étaient staged le restent)
-
-# Voir la liste
-git stash list
-# stash@{0}: On main: wip: refacto contrôleur user
-# stash@{1}: WIP on main: abc1234 fix login
-```
-
-> Sans `--index`, `pop` restaure tout dans le working tree mais perd l'état staged/unstaged.
-
-</v-click>
-
-<!--
--u : évite la surprise de perdre des fichiers non-trackés quand on change de branche
---index au pop : restaure l'état staged/unstaged exact au moment du stash
--->
-
----
-layout: default
----
-
-# `git stash` — config & alias
-
-Pas de config pour imposer `-u -m` par défaut → alias indispensable.
-
-```bash
-# Configs disponibles
-git config --global stash.showIncludeUntracked true  # stash show inclut les untracked
-git config --global stash.index true                 # pop/apply se comportent comme --index par défaut
-```
-
-<v-click>
-
-```bash
-# Alias pour ne jamais oublier -u et -m
-git config --global alias.ss 'stash push -u'
-# Usage : git ss -m "wip: ma feature"
-
-# Ou avec message via un script shell
-git config --global alias.sw '!git stash push -u -m'
-# Usage : git sw "wip: ma feature"
-```
-
-</v-click>
-
-<!--
-stash.showIncludeUntracked affecte uniquement git stash show.
-stash.index = true évite de devoir taper --index à chaque pop/apply : restaure l'état staged/unstaged automatiquement.
-L'alias sw (stash work) + message rend le flux naturel : git sw "contexte", git stash pop --index.
 -->
 
 ---
