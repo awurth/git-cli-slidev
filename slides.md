@@ -62,7 +62,6 @@ layout: section
 
 # Regarder ses changements
 
-Comprendre ce qui change, ce qui a changé
 
 ---
 layout: default
