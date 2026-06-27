@@ -153,8 +153,6 @@ L'alias ap combine les deux étapes du workflow courant en une seule commande.
 -->
 
 ---
-layout: two-cols
----
 
 # delta
 
@@ -175,19 +173,22 @@ git config --global interactive.diffFilter "delta --color-only"
 - Numéros de lignes
 - Thèmes personnalisables
 
-::right::
+<!--
+Montrer une capture d'écran ou une démo si possible. L'impact visuel est immédiat.
+delta : https://github.com/dandavison/delta
+-->
 
-<v-click>
+---
 
 # diff-so-fancy
 
-Alternative plus légère.
+Alternative plus légère à **delta**.
 
 ```bash
 npm install -g diff-so-fancy
 
-git config --global core.pager \
-  "diff-so-fancy | less --tabs=4 -RFX"
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --global interactive.diffFilter "diff-so-fancy --patch"
 ```
 
 **Différences avec delta :**
@@ -195,13 +196,7 @@ git config --global core.pager \
 - Moins de fonctionnalités
 - Rendu épuré
 
-> Les deux transforment radicalement la lisibilité des diffs. À tester absolument.
-
-</v-click>
-
 <!--
-Montrer une capture d'écran ou une démo si possible. L'impact visuel est immédiat.
-delta : https://github.com/dandavison/delta
 diff-so-fancy : https://github.com/so-fancy/diff-so-fancy
 
 En préparant ces slides j'ai découvert un concurrent : hunk (https://github.com/modem-dev/hunk) qui se prétend meilleur que les deux. Pas testé.
