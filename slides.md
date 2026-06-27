@@ -281,37 +281,6 @@ diff.colorMoved peut valoir : no, default, blocks, zebra, dimmed-zebra
 layout: default
 ---
 
-# `diff.algorithm histogram`
-
-Meilleur algorithme de diff : résultats plus lisibles, surtout après un refactoring.
-
-```bash
-git config --global diff.algorithm histogram
-```
-
-<v-click>
-
-Myers (défaut) essaie de minimiser les lignes modifiées — peut produire des diffs contre-intuitifs.
-Histogram détecte mieux les blocs déplacés et produit des hunks plus cohérents.
-
-```bash
-# Applicable aussi ponctuellement
-git diff --diff-algorithm=histogram
-```
-
-> Pas de changement fonctionnel, juste une meilleure lisibilité. Upgrade immédiat.
-
-</v-click>
-
-<!--
-histogram : créé par JGit (Eclipse). Supérieur à patience, lui-même supérieur à myers.
-Disponible dans git depuis longtemps mais peu connu.
--->
-
----
-layout: default
----
-
 # `git branch -v`
 
 Voir l'état de ses branches en un coup d'œil.
@@ -609,51 +578,6 @@ git stash pop    # après le rebase
 Fini les `git stash` manuels avant chaque rebase.
 
 </v-click>
-
----
-layout: default
----
-
-# fixup et autosquash
-
-Corriger un vieux commit **proprement**, sans ouvrir le rebase à la main.
-
-```bash
-# 1. Créer un commit de correction ciblé
-git add -p
-git commit --fixup a1b2c3d
-# Résultat : fixup! Ajouter le formulaire  ← dans le log
-```
-
-<v-click>
-
-```bash
-# 2. Rebase avec autosquash : git place et marque automatiquement
-git rebase -i --autosquash HEAD~6
-```
-
-```
-pick a1b2c3d Ajouter le formulaire
-fixup f2e1d0c fixup! Ajouter le formulaire
-pick b2c3d4e Suite du travail
-```
-
-Plus qu'à sauvegarder. ✅
-
-</v-click>
-
-<v-click>
-
-```bash
-# Activer autosquash par défaut
-git config --global rebase.autoSquash true
-```
-
-</v-click>
-
-<!--
---fixup accepte aussi un message partiel : git commit --fixup :/formulaire
--->
 
 ---
 layout: two-cols
@@ -1403,6 +1327,19 @@ Oh My Zsh/Fish incluent déjà des alias git. Vérifier avant de dupliquer.
 Oh My Zsh git plugin : https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
 gst = git status, gco = git checkout, etc.
 -->
+
+---
+
+# À découvrir aussi
+
+<v-clicks>
+
+- `git config --global diff.algorithm histogram` — algorithme de diff plus lisible sur certains fichiers
+- `git commit --fixup` — créer automatiquement un commit de correction pour l'autosquash
+- `git bisect` — trouver le commit qui a introduit un bug par dichotomie
+- `git worktree` — plusieurs branches en parallèle dans des dossiers séparés
+
+</v-clicks>
 
 ---
 layout: center
