@@ -45,11 +45,14 @@ layout: default
 
 <v-clicks>
 
-- **Préparer un commit** — staging sélectif, stash, add -p
-- **Lire son dépôt** — diff lisible, delta, color-moved
-- **Naviguer et corriger** — switch/restore, rebase interactif, log
-- **Collaborer en sécurité** — force-with-lease, rerere
-- **Configurer son environnement** — aliases, gitignore global
+- **Regarder ses changements** — diff, delta, color-moved, log
+- **Naviguer** — switch/restore, branch -v
+- **Mettre de côté** — stash
+- **Préparer le commit** — add -N, add -p, commit.verbose
+- **Rebase** — rebase -i, autoStash, update-refs
+- **Pousser** — pull.rebase, force-with-lease
+- **Conflits** — zdiff3, rerere
+- **Config & aliases** — gitignore global, includeIf, aliases
 
 </v-clicks>
 
@@ -57,103 +60,55 @@ layout: default
 layout: section
 ---
 
-# Préparer un commit
+# Regarder ses changements
 
-Choisir exactement ce qui part dans le commit
-
----
-layout: default
----
-
-# `git stash push` — options utiles
-
-```bash
-# Inclure les fichiers non-trackés
-git stash push -u
-
-# Nommer son stash
-git stash push -m "wip: refacto contrôleur user"
-
-# Tout combiner
-git stash push -u -m "wip: nouvelle feature"
-```
-
-<v-click>
-
-```bash
-# git stash list — les noms rendent la liste lisible
-stash@{0}: On main: wip: refacto contrôleur user
-stash@{1}: On main: wip: nouvelle feature
-# Sans -m → stash@{2}: WIP on main: abc1234 fix login
-```
-
-</v-click>
-
-<!--
--u : évite la surprise de perdre des fichiers non-trackés quand on change de branche
-Nommer ses stashs = indispensable dès qu'on en accumule plusieurs
--->
+Comprendre ce qui change, ce qui a changé
 
 ---
 layout: default
 ---
 
-# `git stash pop` — restaurer l'état exact
+# `status.showUntrackedFiles`
+
+Par défaut, git regroupe les fichiers non-trackés sous leur dossier parent.
 
 ```bash
-# Restaurer aussi l'état staged/unstaged
-git stash pop --index
-
-# Ou en config pour ne jamais y penser
-git config --global stash.index true
+$ git status
+Untracked files:
+  src/   # ← on ne voit pas ce qu'il y a dedans
 ```
-
-> `stash.index true` = `--index` automatique à chaque pop/apply.
 
 <v-click>
 
 ```bash
-# Alias — ne plus jamais oublier -u et -m
-git config --global alias.sw '!git stash push -u -m'
-# Usage : git sw "wip: ma feature"
+git config --global status.showUntrackedFiles all
+```
+
+```bash
+$ git status
+Untracked files:
+  src/Controller/UserController.php
+  src/Repository/UserRepository.php
+  src/Entity/User.php
+```
+
+> Voir tous les fichiers, pas juste le dossier — utile avant un `git add`.
+
+</v-click>
+
+<v-click>
+
+Ou ponctuellement :
+
+```bash
+git status -u
 ```
 
 </v-click>
 
 <!--
-stash.index = true évite de devoir taper --index à chaque pop/apply : restaure l'état staged/unstaged automatiquement.
-L'alias sw (stash work) rend le flux naturel : git sw "contexte", git stash pop.
--->
-
----
-layout: default
----
-
-# `git add -p`
-
-Le **mode patch** : sélectionner les hunks (gros morceaux) à indexer un par un — bugfix, refactoring, debug, sans toucher aux fichiers.
-
-```bash
-git add -p
-```
-
-<v-click>
-
-| Touche | Action |
-|--------|--------|
-| `y` | Indexer ce hunk |
-| `n` | Ignorer ce hunk |
-| `s` | Découper en plus petits hunks |
-| `e` | Éditer manuellement |
-| `q` | Quitter |
-
-> 💡 `-p` fonctionne aussi avec `restore`, `stash`, `reset`, `commit`
-
-</v-click>
-
-<!--
-Démonstration live si possible. C'est souvent une révélation pour les devs qui ne connaissent pas.
-La symétrie est intentionnelle : -p fait toujours la même chose, quelle que soit la commande.
+Comportement par défaut frustrant quand on découvre un repo ou un nouveau dossier.
+Avec `all`, on voit exactement ce qui sera stagé.
 -->
 
 ---
@@ -197,14 +152,6 @@ git add -p            # indexer sélectivement
 Petit tip mais qui fait gagner du temps quand on a créé plusieurs nouveaux fichiers.
 L'alias ap combine les deux étapes du workflow courant en une seule commande.
 -->
-
----
-layout: section
----
-
-# Lire son dépôt
-
-Comprendre ce qui change, ce qui a changé
 
 ---
 layout: two-cols
@@ -297,53 +244,6 @@ diff.colorMoved peut valoir : no, default, blocks, zebra, dimmed-zebra
 layout: default
 ---
 
-# `git branch -v`
-
-Voir l'état de ses branches en un coup d'œil.
-
-```bash
-git branch -v
-```
-
-```
-  feature/auth     a3f2e1c Add JWT middleware
-  feature/search   8b4d2f0 WIP: elastic integration
-* main             c1e9a4b Merge pull request #42
-  hotfix/login     f2a1c3d Fix session timeout
-  old-feature      f2a1c3d [gone] WIP
-```
-
-<v-clicks>
-
-```bash
-# -vv : voir aussi le tracking remote
-git branch -vv
-```
-
-```
-  feature/auth  a3f2e1c [origin/feature/auth] Add JWT middleware
-* main          c1e9a4b [origin/main: behind 3] Merge pull request #42
-  old-feature   f2a1c3d [origin/old-feature: gone] WIP
-```
-
-```bash
-# Trier par date de dernier commit
-git branch --sort=-committerdate -v
-
-# Activer par défaut
-git config --global branch.sort -committerdate
-```
-
-</v-clicks>
-
-<!--
-branch -vv révèle aussi les branches qui ont divergé du remote. Très utile en équipe.
--->
-
----
-layout: default
----
-
 # `git log` — options essentielles
 
 ```bash
@@ -388,9 +288,9 @@ Les deux peuvent être lents sur un gros dépôt : limiter avec --since, -n ou -
 layout: section
 ---
 
-# Naviguer et corriger
+# Naviguer
 
-Se déplacer et réécrire l'historique
+Se déplacer dans le dépôt
 
 ---
 layout: two-cols-header
@@ -484,6 +384,201 @@ git switch -          # retour sur sa branche de feature
 <!--
 Simple mais méconnu. Économise beaucoup de temps sur les allers-retours entre deux branches.
 -->
+
+---
+layout: default
+---
+
+# `git branch -v`
+
+Voir l'état de ses branches en un coup d'œil.
+
+```bash
+git branch -v
+```
+
+```
+  feature/auth     a3f2e1c Add JWT middleware
+  feature/search   8b4d2f0 WIP: elastic integration
+* main             c1e9a4b Merge pull request #42
+  hotfix/login     f2a1c3d Fix session timeout
+  old-feature      f2a1c3d [gone] WIP
+```
+
+<v-clicks>
+
+```bash
+# -vv : voir aussi le tracking remote
+git branch -vv
+```
+
+```
+  feature/auth  a3f2e1c [origin/feature/auth] Add JWT middleware
+* main          c1e9a4b [origin/main: behind 3] Merge pull request #42
+  old-feature   f2a1c3d [origin/old-feature: gone] WIP
+```
+
+```bash
+# Trier par date de dernier commit
+git branch --sort=-committerdate -v
+
+# Activer par défaut
+git config --global branch.sort -committerdate
+```
+
+</v-clicks>
+
+<!--
+branch -vv révèle aussi les branches qui ont divergé du remote. Très utile en équipe.
+-->
+
+---
+layout: section
+---
+
+# Mettre de côté
+
+Changer de contexte sans perdre son travail
+
+---
+layout: default
+---
+
+# `git stash push` — options utiles
+
+```bash
+# Inclure les fichiers non-trackés
+git stash push -u
+
+# Nommer son stash
+git stash push -m "wip: refacto contrôleur user"
+
+# Tout combiner
+git stash push -u -m "wip: nouvelle feature"
+```
+
+<v-click>
+
+```bash
+# git stash list — les noms rendent la liste lisible
+stash@{0}: On main: wip: refacto contrôleur user
+stash@{1}: On main: wip: nouvelle feature
+# Sans -m → stash@{2}: WIP on main: abc1234 fix login
+```
+
+</v-click>
+
+<!--
+-u : évite la surprise de perdre des fichiers non-trackés quand on change de branche
+Nommer ses stashs = indispensable dès qu'on en accumule plusieurs
+-->
+
+---
+layout: default
+---
+
+# `git stash pop` — restaurer l'état exact
+
+```bash
+# Restaurer aussi l'état staged/unstaged
+git stash pop --index
+
+# Ou en config pour ne jamais y penser
+git config --global stash.index true
+```
+
+> `stash.index true` = `--index` automatique à chaque pop/apply.
+
+<v-click>
+
+```bash
+# Alias — ne plus jamais oublier -u et -m
+git config --global alias.sw '!git stash push -u -m'
+# Usage : git sw "wip: ma feature"
+```
+
+</v-click>
+
+<!--
+stash.index = true évite de devoir taper --index à chaque pop/apply : restaure l'état staged/unstaged automatiquement.
+L'alias sw (stash work) rend le flux naturel : git sw "contexte", git stash pop.
+-->
+
+---
+layout: section
+---
+
+# Préparer un commit
+
+Choisir exactement ce qui part dans le commit
+
+---
+layout: default
+---
+
+# `git add -p`
+
+Le **mode patch** : sélectionner les hunks (gros morceaux) à indexer un par un — bugfix, refactoring, debug, sans toucher aux fichiers.
+
+```bash
+git add -p
+```
+
+<v-click>
+
+| Touche | Action |
+|--------|--------|
+| `y` | Indexer ce hunk |
+| `n` | Ignorer ce hunk |
+| `s` | Découper en plus petits hunks |
+| `e` | Éditer manuellement |
+| `q` | Quitter |
+
+> 💡 `-p` fonctionne aussi avec `restore`, `stash`, `reset`, `commit`
+
+</v-click>
+
+<!--
+Démonstration live si possible. C'est souvent une révélation pour les devs qui ne connaissent pas.
+La symétrie est intentionnelle : -p fait toujours la même chose, quelle que soit la commande.
+-->
+
+---
+layout: default
+---
+
+# `commit.verbose` — voir le diff dans l'éditeur
+
+Par défaut, l'éditeur de commit ne montre rien du tout.
+
+```bash
+# Ponctuellement
+git commit -v
+git commit --verbose
+```
+
+<v-click>
+
+```bash
+# Toujours actif
+git config --global commit.verbose true
+```
+
+L'éditeur affiche le diff complet sous le message — plus besoin d'un terminal séparé pour se rappeler ce qu'on committe.
+
+</v-click>
+
+<!--
+Particulièrement utile pour les commits multi-fichiers : on écrit un message précis en voyant exactement ce qui part.
+-->
+
+---
+layout: section
+---
+
+# Rebase
+
+Réécrire l'historique avant de pousser
 
 ---
 layout: default
@@ -751,6 +846,227 @@ Introduites dans git 2.54 (2026). Vérifier disponibilité : git history --help
 
 ---
 layout: section
+---
+
+# Pousser
+
+Envoyer son travail sur le remote
+
+---
+layout: default
+---
+
+# `pull.rebase` — éviter les merge commits parasites
+
+```bash
+git pull  # sans config = merge commit si divergence
+# → Merge branch 'main' of github.com/foo/bar  ← bruit dans l'historique
+```
+
+<v-click>
+
+```bash
+git config --global pull.rebase true
+# git pull = git fetch + git rebase
+```
+
+Historique linéaire, pas de merge commits inutiles.
+
+</v-click>
+
+<v-click>
+
+```bash
+# Variante : préserver les merges locaux intentionnels
+git config --global pull.rebase merges
+```
+
+> `true` pour la plupart des cas. `merges` si votre branche contient des merges intentionnels à conserver.
+
+</v-click>
+
+<!--
+pull.rebase true : équivalent à toujours passer --rebase à git pull.
+Combine bien avec rebase.autoStash true pour ne pas bloquer sur des modifs non commitées.
+-->
+
+---
+
+# `push.autoSetupRemote`
+
+Fini le `git push -u origin HEAD` sur chaque nouvelle branche.
+
+<v-click>
+
+```bash
+# Sans le réglage
+git switch -c ma-feature
+git push   # ✗ fatal: The current branch ma-feature has no upstream branch.
+           #   To push the current branch and set the remote as upstream, use
+           #   git push --set-upstream origin ma-feature
+```
+
+</v-click>
+
+<v-click>
+
+```bash
+git config --global push.autoSetupRemote true
+
+git switch -c ma-feature
+git push   # ✓ push + tracking configuré automatiquement
+```
+
+</v-click>
+
+<!--
+Disponible depuis git 2.37 (2022).
+Équivalent à toujours passer --set-upstream, mais sans y penser.
+Compatible avec push.default = simple (défaut depuis git 2.0).
+-->
+
+---
+layout: default
+---
+
+# `push --force-with-lease`
+
+`git push --force` devrait presque toujours être remplacé.
+
+<v-click>
+
+**Le problème :**
+```bash
+# Bob a poussé un commit pendant qu'Alice rebasait
+git push --force   # ← Alice écrase le commit de Bob silencieusement
+```
+
+**La solution :**
+```bash
+git push --force-with-lease --force-if-includes
+# Si quelqu'un a poussé entre-temps → REJET avec erreur claire
+
+# Activer --force-if-includes automatiquement (git 2.30+, 2020)
+git config --global push.useForceIfIncludes true
+
+# Alias indispensable
+git config --global alias.pf "push --force-with-lease"
+git pf
+```
+
+</v-click>
+
+<!--
+force-with-lease existe depuis git 1.8.5 (2013). Pas d'excuse pour utiliser --force.
+force-if-includes : protection supplémentaire si le fetch a été fait mais pas intégré.
+push.useForceIfIncludes : active --force-if-includes automatiquement sur tous les push --force-with-lease.
+-->
+
+---
+layout: section
+---
+
+# Gérer les conflits
+
+Résoudre intelligemment
+
+---
+layout: two-cols-header
+---
+
+# `merge.conflictStyle zdiff3`
+
+Mieux comprendre les conflits grâce au contexte ancêtre.
+
+::left::
+
+**Style par défaut (`merge`) :**
+
+```
+<<<<<<< HEAD
+return $user->getEmail();
+=======
+return $user->getUsername();
+>>>>>>> feature/login
+```
+
+😕 Impossible de savoir pourquoi ça a divergé.
+
+::right::
+
+<v-click>
+
+**Avec `zdiff3` :**
+
+```
+<<<<<<< HEAD
+return $user->getEmail();
+||||||| base
+return $user->getName();
+=======
+return $user->getUsername();
+>>>>>>> feature/login
+```
+
+✅ Le bloc `|||||||` montre le code **avant** les deux modifications.
+
+```bash
+git config --global merge.conflictStyle zdiff3
+```
+
+Disponible depuis git 2.35 (2022). `zdiff3` améliore `diff3` en réduisant les faux conflits.
+
+</v-click>
+
+<!--
+zdiff3 = "zealous diff3". Moins de conflits parasites que diff3 classique.
+Indispensable avec rerere : la résolution est plus intelligente avec un meilleur contexte ancêtre.
+-->
+
+---
+layout: default
+---
+
+# rerere — Reuse Recorded Resolution
+
+Git mémorise les résolutions de conflits pour les rejouer automatiquement.
+
+```bash
+# Activer rerere
+git config --global rerere.enabled true
+
+# Mettre à jour l'index automatiquement après résolution
+git config --global rerere.autoUpdate true
+```
+
+<v-click>
+
+**Cas d'usage typique :**
+```bash
+# Branche longue qu'on rebase régulièrement sur main
+git rebase main    # → conflit sur src/Service/Auth.php
+# Résoudre le conflit manuellement → rerere enregistre
+
+# La semaine suivante, même rebase
+git rebase main    # → rerere rejoue automatiquement ✅
+```
+
+```bash
+git rerere status  # voir les résolutions enregistrées
+git rerere diff    # voir ce que rerere va appliquer
+```
+
+</v-click>
+
+<!--
+rerere.autoUpdate : applique la résolution ET indexe le fichier. Sans ça, il faut faire git add manuellement.
+Très utile sur les projets où une branche de feature vit longtemps en parallèle de main.
+
+Si vous avez souvent des conflits difficiles à gérer lors des rebases, regardez aussi du côté de `git rebase --onto` : ça permet de rebaser uniquement une partie d'une branche, et d'éviter de rejouer des conflits liés à des commits qui n'ont rien à voir avec ce qu'on veut intégrer.
+-->
+
+---
+layout: section
 disabled: true
 ---
 
@@ -820,219 +1136,6 @@ On ne peut pas avoir la même branche dans deux worktrees simultanément.
 layout: section
 ---
 
-# Collaborer en sécurité
-
-Protéger le travail de l'équipe
-
----
-layout: default
----
-
-# `push --force-with-lease`
-
-`git push --force` devrait presque toujours être remplacé.
-
-<v-click>
-
-**Le problème :**
-```bash
-# Bob a poussé un commit pendant qu'Alice rebasait
-git push --force   # ← Alice écrase le commit de Bob silencieusement
-```
-
-**La solution :**
-```bash
-git push --force-with-lease --force-if-includes
-# Si quelqu'un a poussé entre-temps → REJET avec erreur claire
-
-# Activer --force-if-includes automatiquement (git 2.30+, 2020)
-git config --global push.useForceIfIncludes true
-
-# Alias indispensable
-git config --global alias.pf "push --force-with-lease"
-git pf
-```
-
-</v-click>
-
-<!--
-force-with-lease existe depuis git 1.8.5 (2013). Pas d'excuse pour utiliser --force.
-force-if-includes : protection supplémentaire si le fetch a été fait mais pas intégré.
-push.useForceIfIncludes : active --force-if-includes automatiquement sur tous les push --force-with-lease.
--->
-
----
-
-# `push.autoSetupRemote`
-
-Fini le `git push -u origin HEAD` sur chaque nouvelle branche.
-
-<v-click>
-
-```bash
-# Sans le réglage
-git switch -c ma-feature
-git push   # ✗ fatal: The current branch ma-feature has no upstream branch.
-           #   To push the current branch and set the remote as upstream, use
-           #   git push --set-upstream origin ma-feature
-```
-
-</v-click>
-
-<v-click>
-
-```bash
-git config --global push.autoSetupRemote true
-
-git switch -c ma-feature
-git push   # ✓ push + tracking configuré automatiquement
-```
-
-</v-click>
-
-<!--
-Disponible depuis git 2.37 (2022).
-Équivalent à toujours passer --set-upstream, mais sans y penser.
-Compatible avec push.default = simple (défaut depuis git 2.0).
--->
-
----
-layout: default
----
-
-# `pull.rebase` — éviter les merge commits parasites
-
-```bash
-git pull  # sans config = merge commit si divergence
-# → Merge branch 'main' of github.com/foo/bar  ← bruit dans l'historique
-```
-
-<v-click>
-
-```bash
-git config --global pull.rebase true
-# git pull = git fetch + git rebase
-```
-
-Historique linéaire, pas de merge commits inutiles.
-
-</v-click>
-
-<v-click>
-
-```bash
-# Variante : préserver les merges locaux intentionnels
-git config --global pull.rebase merges
-```
-
-> `true` pour la plupart des cas. `merges` si votre branche contient des merges intentionnels à conserver.
-
-</v-click>
-
-<!--
-pull.rebase true : équivalent à toujours passer --rebase à git pull.
-Combine bien avec rebase.autoStash true pour ne pas bloquer sur des modifs non commitées.
--->
-
----
-layout: default
----
-
-# rerere — Reuse Recorded Resolution
-
-Git mémorise les résolutions de conflits pour les rejouer automatiquement.
-
-```bash
-# Activer rerere
-git config --global rerere.enabled true
-
-# Mettre à jour l'index automatiquement après résolution
-git config --global rerere.autoUpdate true
-```
-
-<v-click>
-
-**Cas d'usage typique :**
-```bash
-# Branche longue qu'on rebase régulièrement sur main
-git rebase main    # → conflit sur src/Service/Auth.php
-# Résoudre le conflit manuellement → rerere enregistre
-
-# La semaine suivante, même rebase
-git rebase main    # → rerere rejoue automatiquement ✅
-```
-
-```bash
-git rerere status  # voir les résolutions enregistrées
-git rerere diff    # voir ce que rerere va appliquer
-```
-
-</v-click>
-
-<!--
-rerere.autoUpdate : applique la résolution ET indexe le fichier. Sans ça, il faut faire git add manuellement.
-Très utile sur les projets où une branche de feature vit longtemps en parallèle de main.
-
-Si vous avez souvent des conflits difficiles à gérer lors des rebases, regardez aussi du côté de `git rebase --onto` : ça permet de rebaser uniquement une partie d'une branche, et d'éviter de rejouer des conflits liés à des commits qui n'ont rien à voir avec ce qu'on veut intégrer.
--->
-
----
-layout: two-cols-header
----
-
-# `merge.conflictStyle zdiff3`
-
-Mieux comprendre les conflits grâce au contexte ancêtre.
-
-::left::
-
-**Style par défaut (`merge`) :**
-
-```
-<<<<<<< HEAD
-return $user->getEmail();
-=======
-return $user->getUsername();
->>>>>>> feature/login
-```
-
-😕 Impossible de savoir pourquoi ça a divergé.
-
-::right::
-
-<v-click>
-
-**Avec `zdiff3` :**
-
-```
-<<<<<<< HEAD
-return $user->getEmail();
-||||||| base
-return $user->getName();
-=======
-return $user->getUsername();
->>>>>>> feature/login
-```
-
-✅ Le bloc `|||||||` montre le code **avant** les deux modifications.
-
-```bash
-git config --global merge.conflictStyle zdiff3
-```
-
-Disponible depuis git 2.35 (2022). `zdiff3` améliore `diff3` en réduisant les faux conflits.
-
-</v-click>
-
-<!--
-zdiff3 = "zealous diff3". Moins de conflits parasites que diff3 classique.
-Indispensable avec rerere : la résolution est plus intelligente avec un meilleur contexte ancêtre.
--->
-
----
-layout: section
----
-
 # Configurer son environnement
 
 Mettre en place une fois, en profiter partout
@@ -1077,53 +1180,6 @@ git config --global core.excludesFile ~/.gitignore_global
 <!--
 Évite les PR polluées par des fichiers .DS_Store ou .idea.
 À faire une fois et ça s'applique à tous vos projets.
--->
-
----
-layout: default
----
-
-# `status.showUntrackedFiles`
-
-Par défaut, git regroupe les fichiers non-trackés sous leur dossier parent.
-
-```bash
-$ git status
-Untracked files:
-  src/   # ← on ne voit pas ce qu'il y a dedans
-```
-
-<v-click>
-
-```bash
-git config --global status.showUntrackedFiles all
-```
-
-```bash
-$ git status
-Untracked files:
-  src/Controller/UserController.php
-  src/Repository/UserRepository.php
-  src/Entity/User.php
-```
-
-> Voir tous les fichiers, pas juste le dossier — utile avant un `git add`.
-
-</v-click>
-
-<v-click>
-
-Ou ponctuellement :
-
-```bash
-git status -u
-```
-
-</v-click>
-
-<!--
-Comportement par défaut frustrant quand on découvre un repo ou un nouveau dossier.
-Avec `all`, on voit exactement ce qui sera stagé.
 -->
 
 ---
@@ -1208,35 +1264,6 @@ git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
 Sans fetch.prune, git branch -r affiche des branches supprimées indéfiniment.
 fetch.pruneTags : disponible depuis git 2.17 (2018).
 -D : force la suppression même si non mergée.
--->
-
----
-layout: default
----
-
-# `commit.verbose` — voir le diff dans l'éditeur
-
-Par défaut, l'éditeur de commit ne montre rien du tout.
-
-```bash
-# Ponctuellement
-git commit -v
-git commit --verbose
-```
-
-<v-click>
-
-```bash
-# Toujours actif
-git config --global commit.verbose true
-```
-
-L'éditeur affiche le diff complet sous le message — plus besoin d'un terminal séparé pour se rappeler ce qu'on committe.
-
-</v-click>
-
-<!--
-Particulièrement utile pour les commits multi-fichiers : on écrit un message précis en voyant exactement ce qui part.
 -->
 
 ---
