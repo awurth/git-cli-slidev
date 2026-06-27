@@ -38,6 +38,22 @@ L'objectif aujourd'hui c'est de vous donner des outils concrets pour aller plus 
 <img src="./qr-slides.png" class="absolute bottom-10 left-12 h-14" alt="Slides" />
 
 ---
+layout: default
+---
+
+# Au programme
+
+<v-clicks>
+
+- **Préparer un commit** — staging sélectif, stash, add -p
+- **Lire son dépôt** — diff lisible, delta, color-moved
+- **Naviguer et corriger** — switch/restore, rebase interactif, log
+- **Collaborer en sécurité** — force-with-lease, rerere
+- **Configurer son environnement** — aliases, gitignore global
+
+</v-clicks>
+
+---
 layout: section
 ---
 
