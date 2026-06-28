@@ -48,7 +48,7 @@ layout: default
 - **Regarder ses changements** — diff, delta, color-moved, log
 - **Naviguer** — switch/restore, branch -v
 - **Mettre de côté** — stash
-- **Préparer le commit** — add -N, add -p, commit.verbose
+- **Préparer le commit** — add -p, add -N, commit.verbose
 - **Rebase** — rebase -i, autoStash, update-refs
 - **Pousser** — pull.rebase, force-with-lease
 - **Conflits** — zdiff3, rerere
@@ -96,48 +96,6 @@ Untracked files:
 ```
 
 </v-click>
-
----
-layout: default
----
-
-# `git add -N` — intention d'ajouter
-
-Nouveaux fichiers **invisibles** à `git diff` et `git add -p` par défaut.
-
-```bash
-# Nouveau fichier : git diff ne le montre pas
-touch src/new-feature.php
-git diff  # → rien
-
-# Avec -N (--intent-to-add)
-git add -N src/new-feature.php
-git diff  # → montre le fichier entier comme ajout
-```
-
-<v-click>
-
-**Utilité** : visualiser l'ensemble de ses modifications d'un coup, nouveaux fichiers inclus, avant de committer.
-
-```bash
-# Workflow courant
-git add -N .          # marquer tous les nouveaux fichiers
-git diff              # voir tout ce qui change
-git add -p            # indexer sélectivement
-```
-
-</v-click>
-
-<v-click>
-
-💡 **Alias utile** : `git ap = !git add -N . && git add -p`
-
-</v-click>
-
-<!--
-Petit tip mais qui fait gagner du temps quand on a créé plusieurs nouveaux fichiers.
-L'alias ap combine les deux étapes du workflow courant en une seule commande.
--->
 
 ---
 layout: center
@@ -553,6 +511,42 @@ git add -p
 Démonstration live si possible. C'est souvent une révélation pour les devs qui ne connaissent pas.
 La symétrie est intentionnelle : -p fait toujours la même chose, quelle que soit la commande.
 -->
+
+---
+layout: default
+---
+
+# `git add -N` — intention d'ajouter
+
+```bash
+$ git status
+Untracked files:
+  src/Controller/UserController.php
+
+git diff              # → rien
+```
+
+<br>
+
+<v-click>
+
+```bash
+git add -N src/Controller/UserController.php
+git diff              # → montre le fichier entier comme ajout
+```
+
+</v-click>
+
+<br>
+
+<v-click>
+
+```bash
+git add -N .          # marquer tous les nouveaux fichiers
+git add -p            # indexer sélectivement
+```
+
+</v-click>
 
 ---
 layout: default
