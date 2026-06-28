@@ -485,9 +485,9 @@ Choisir exactement ce qui part dans le commit
 layout: default
 ---
 
-# `git add -p`
+# `git add -p` — mode patch
 
-Le **mode patch** : sélectionner les hunks (gros morceaux) à indexer un par un — bugfix, refactoring, debug, sans toucher aux fichiers.
+Sélectionner les hunks (gros morceaux) à indexer un par un.
 
 ```bash
 git add -p
@@ -495,22 +495,37 @@ git add -p
 
 <v-click>
 
-| Touche | Action |
-|--------|--------|
-| `y` | Indexer ce hunk |
-| `n` | Ignorer ce hunk |
-| `s` | Découper en plus petits hunks |
-| `e` | Éditer manuellement |
-| `q` | Quitter |
-
-> 💡 `-p` fonctionne aussi avec `restore`, `stash`, `reset`, `commit`
+<img src="./add-p.png" class="mt-4 max-h-72 rounded shadow" />
 
 </v-click>
 
 <!--
-Démonstration live si possible. C'est souvent une révélation pour les devs qui ne connaissent pas.
-La symétrie est intentionnelle : -p fait toujours la même chose, quelle que soit la commande.
+> 💡 `-p` fonctionne aussi avec `restore`, `stash`, `reset`, `commit`
 -->
+
+---
+layout: default
+---
+
+# `git add -p` — aide interactive
+
+<img src="./add-p-help.png" class="mt-4 max-h-96 rounded shadow" />
+
+---
+layout: default
+---
+
+# `git add -p` — découper un hunk
+
+<img src="./add-p-s.png" class="mt-4 max-h-96 rounded shadow" />
+
+---
+layout: default
+---
+
+# `git add -p` — éditer un hunk manuellement
+
+<img src="./add-p-e.png" class="mt-4 max-h-96 rounded shadow" />
 
 ---
 layout: default
