@@ -188,6 +188,7 @@ git config --global interactive.diffFilter "diff-so-fancy --patch"
 **Rendu :**
 - En-têtes de fichiers mis en valeur
 - `+`/`-` remplacés par des blocs colorés
+- Surlignage des caractères modifiés dans chaque ligne
 - Pas de configuration supplémentaire
 
 ---
