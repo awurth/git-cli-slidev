@@ -182,11 +182,11 @@ git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 git config --global interactive.diffFilter "diff-so-fancy --patch"
 ```
 
-**Rendu :**
+<br>
+
 - En-têtes de fichiers mis en valeur
 - `+`/`-` remplacés par des blocs colorés
-- Surlignage des caractères modifiés dans chaque ligne
-- Pas de configuration supplémentaire
+- Surlignage des changements
 
 ---
 layout: image
@@ -207,10 +207,12 @@ git config --global core.pager delta
 git config --global interactive.diffFilter "delta --color-only"
 ```
 
-**Fonctionnalités :**
-- Coloration syntaxique dans les diffs
-- Thèmes personnalisés et clair/sombre automatique
-- Affichage côte-à-côte (`--side-by-side`)
+<br>
+
+- Coloration syntaxique
+- Thèmes personnalisés
+- Mode light/dark automatique
+- Affichage "side-by-side"
 - Numéros de lignes
 
 <!--
