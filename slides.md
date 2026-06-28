@@ -165,12 +165,9 @@ image: /git-diff-base.png
 backgroundSize: contain
 ---
 
----
-layout: center
-class: text-center
----
-
-<div class="text-9xl">💩</div>
+<div v-click class="absolute inset-0 flex items-center justify-center">
+  <div class="text-9xl">💩</div>
+</div>
 
 ---
 
