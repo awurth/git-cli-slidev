@@ -154,9 +154,31 @@ L'alias ap combine les deux étapes du workflow courant en une seule commande.
 
 ---
 
-# delta
+# diff-so-fancy
 
-Remplacer le pager par défaut (`less`) par **delta**.
+```bash
+# Installation
+npm install -g diff-so-fancy
+
+# Configuration
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --global interactive.diffFilter "diff-so-fancy --patch"
+```
+
+**Rendu :**
+- En-têtes de fichiers mis en valeur
+- `+`/`-` remplacés par des blocs colorés
+- Pas de configuration supplémentaire
+
+---
+layout: image
+image: /diff-so-fancy.png
+backgroundSize: contain
+---
+
+---
+
+# delta
 
 ```bash
 # Installation
@@ -168,10 +190,10 @@ git config --global interactive.diffFilter "delta --color-only"
 ```
 
 **Fonctionnalités :**
-- Syntax highlighting dans les diffs
+- Coloration syntaxique dans les diffs
+- Thèmes personnalisés et clair/sombre automatique
 - Affichage côte-à-côte (`--side-by-side`)
 - Numéros de lignes
-- Thèmes personnalisables
 
 <!--
 Montrer une capture d'écran ou une démo si possible. L'impact visuel est immédiat.
@@ -179,22 +201,10 @@ delta : https://github.com/dandavison/delta
 -->
 
 ---
-
-# diff-so-fancy
-
-Alternative plus légère à **delta**.
-
-```bash
-npm install -g diff-so-fancy
-
-git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
-git config --global interactive.diffFilter "diff-so-fancy --patch"
-```
-
-**Différences avec delta :**
-- Plus simple à configurer
-- Moins de fonctionnalités
-- Rendu épuré
+layout: image
+image: /delta.png
+backgroundSize: contain
+---
 
 <!--
 diff-so-fancy : https://github.com/so-fancy/diff-so-fancy
