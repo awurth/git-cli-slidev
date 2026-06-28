@@ -153,6 +153,26 @@ L'alias ap combine les deux étapes du workflow courant en une seule commande.
 -->
 
 ---
+layout: center
+class: text-center
+---
+
+<h1 class="text-8xl font-mono">git diff</h1>
+
+---
+layout: image
+image: /git-diff-base.png
+backgroundSize: contain
+---
+
+---
+layout: center
+class: text-center
+---
+
+<div class="text-9xl">💩</div>
+
+---
 
 # diff-so-fancy
 
