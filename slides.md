@@ -267,11 +267,11 @@ Se déplacer dans le dépôt
 layout: two-cols-header
 ---
 
-# `switch` et `restore` — checkout fait trop de choses
+# `switch` et `restore`
 
 ::left::
 
-**Avant (git checkout)**
+**Navigation de branches**
 
 ```bash
 # Changer de branche
@@ -279,7 +279,11 @@ git checkout main
 
 # Créer et changer de branche
 git checkout -b feature/foo
+```
 
+**Restauration de fichiers**
+
+```bash
 # Restaurer un fichier
 git checkout -- src/foo.php
 
@@ -287,13 +291,11 @@ git checkout -- src/foo.php
 git checkout abc123 -- src/foo.php
 ```
 
-😵 Une seule commande, quatre comportements différents
-
 ::right::
 
 <v-click>
 
-**Maintenant (git 2.23+, 2019)**
+**Navigation de branches**
 
 ```bash
 # Changer de branche
@@ -301,7 +303,15 @@ git switch main
 
 # Créer et changer de branche
 git switch -c feature/foo
+```
 
+</v-click>
+
+<v-click>
+
+**Restauration de fichiers**
+
+```bash
 # Restaurer un fichier (working tree)
 git restore src/foo.php
 
@@ -312,14 +322,7 @@ git restore --source=abc123 src/foo.php
 git restore --staged src/foo.php
 ```
 
-✅ Intentions claires, moins d'erreurs
-
 </v-click>
-
-<!--
-checkout reste disponible et fonctionnel. switch/restore sont juste plus explicites.
-Disponible depuis git 2.23 (août 2019).
--->
 
 ---
 layout: default
