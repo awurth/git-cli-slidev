@@ -181,25 +181,27 @@ En préparant ces slides j'ai découvert un concurrent : hunk (https://github.co
 layout: default
 ---
 
-# `--color-moved`
-
-Colorier les blocs déplacés en couleur distincte — parfait pour les refactorings.
-
-```bash
-git diff --color-moved           # blocs déplacés en couleur distincte
-git diff -w --color-moved        # ignorer les espaces en plus
-```
-
-<v-click>
-
-**Activer par défaut :**
+# `diff.colorMoved`
 
 ```bash
 git config --global diff.colorMoved default
-git config --global diff.colorMovedWS allow-indentation-change
+git config --global diff.colorMovedWS allow-indentation-change # ou ignore-all-space
 ```
 
-On voit immédiatement ce qui bouge vs ce qui change vraiment.
+<br>
+
+<v-click>
+
+<div class="flex gap-4 mt-4">
+  <div class="flex-1 text-center">
+    <div class="text-sm text-gray-500 mb-1">Sans <code>--color-moved</code></div>
+    <img src="./color-moved-without.png" class="rounded shadow" />
+  </div>
+  <div class="flex-1 text-center">
+    <div class="text-sm text-gray-500 mb-1">Avec <code>--color-moved</code></div>
+    <img src="./color-moved-with.png" class="rounded shadow" />
+  </div>
+</div>
 
 </v-click>
 
