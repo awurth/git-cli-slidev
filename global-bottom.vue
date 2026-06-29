@@ -1,5 +1,5 @@
 <template>
   <div class="absolute bottom-4 right-4 text-sm text-gray-400">
-    <SlideCurrentNo /> / <SlidesTotal />
+    {{ $nav.currentPage }} / {{ $nav.total }}
   </div>
 </template>
