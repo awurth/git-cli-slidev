@@ -489,13 +489,19 @@ layout: default
 
 Sélectionner les hunks (gros morceaux) à indexer un par un.
 
+<img src="./add-p-before.png" class="mt-4 max-h-32 rounded shadow mx-auto" />
+
+<v-click>
+
 ```bash
 git add -p
 ```
 
+</v-click>
+
 <v-click>
 
-<img src="./add-p.png" class="mt-4 max-h-72 rounded shadow" />
+<img src="./add-p.png" class="mt-2 max-h-52 rounded shadow mx-auto" />
 
 </v-click>
 
@@ -509,7 +515,7 @@ layout: default
 
 # `git add -p` — aide interactive
 
-<img src="./add-p-help.png" class="mt-4 max-h-96 rounded shadow" />
+<img src="./add-p-help.png" class="mt-4 max-h-96 rounded shadow mx-auto" />
 
 ---
 layout: default
@@ -517,7 +523,7 @@ layout: default
 
 # `git add -p` — découper un hunk
 
-<img src="./add-p-s.png" class="mt-4 max-h-96 rounded shadow" />
+<img src="./add-p-s.png" class="mt-4 max-h-96 rounded shadow mx-auto" />
 
 ---
 layout: default
@@ -525,7 +531,17 @@ layout: default
 
 # `git add -p` — éditer un hunk manuellement
 
-<img src="./add-p-e.png" class="mt-4 max-h-96 rounded shadow" />
+<img src="./add-p-e.png" class="mt-4 max-h-96 rounded shadow mx-auto" />
+
+---
+layout: default
+---
+
+# `git add -p` — résultat
+
+<img src="./add-p-after.png" class="mt-4 max-h-96 rounded shadow mx-auto" />
+
+> 💡 `-p` fonctionne aussi avec `restore`, `stash`, `reset`, `commit`
 
 ---
 layout: default
