@@ -674,34 +674,171 @@ layout: default
 
 # Rebase interactif
 
-Réécrire les N derniers commits avant de pousser.
-
+````md magic-move
 ```bash
-git rebase -i HEAD~5
+$ git log --oneline
+d4e5f6g (HEAD -> feature/login) Ajouter les tests
+c3d4e5f fix typo
+b2c3d4e WIP
+a1b2c3d Ajouter le formulaire de connexion
+9f9152a (main) Mettre à jour la doc
+7e2d3c1 Corriger la pagination
+3a8b4f0 Ajouter le module de paiement
 ```
-
-<v-click>
-
+```bash {2-5}
+$ git log --oneline
+d4e5f6g (HEAD -> feature/login) Ajouter les tests
+c3d4e5f fix typo
+b2c3d4e WIP
+a1b2c3d Ajouter le formulaire de connexion
+9f9152a (main) Mettre à jour la doc
+7e2d3c1 Corriger la pagination
+3a8b4f0 Ajouter le module de paiement
 ```
+```bash
+$ git rebase -i HEAD~4
+```
+```bash
+$ git rebase -i HEAD~4
+# → dans l'éditeur :
+
 pick a1b2c3d Ajouter le formulaire de connexion
 pick b2c3d4e WIP
 pick c3d4e5f fix typo
 pick d4e5f6g Ajouter les tests
+
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# d, drop <commit> = remove commit
 ```
+```bash {4}
+$ git rebase -i HEAD~4
+# → dans l'éditeur :
 
-</v-click>
+reword a1b2c3d Ajouter le formulaire de connexion
+pick b2c3d4e WIP
+pick c3d4e5f fix typo
+pick d4e5f6g Ajouter les tests
 
-<v-click>
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# d, drop <commit> = remove commit
+```
+```bash {6}
+$ git rebase -i HEAD~4
+# → dans l'éditeur :
 
-| Commande | Action |
-|----------|--------|
-| `pick` / `p` | Garder le commit tel quel |
-| `reword` / `r` | Modifier le message |
-| `squash` / `s` | Fusionner avec le précédent (garder msg) |
-| `fixup` / `f` | Fusionner avec le précédent (supprimer msg) |
-| `drop` / `d` | Supprimer le commit |
+pick a1b2c3d Ajouter le formulaire de connexion
+pick b2c3d4e WIP
+drop c3d4e5f fix typo
+pick d4e5f6g Ajouter les tests
 
-</v-click>
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# d, drop <commit> = remove commit
+```
+```bash {4-6}
+$ git rebase -i HEAD~4
+# → dans l'éditeur :
+
+pick a1b2c3d Ajouter le formulaire de connexion
+pick b2c3d4e WIP
+pick d4e5f6g Ajouter les tests
+
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# d, drop <commit> = remove commit
+```
+```bash
+$ git rebase -i HEAD~4
+# → dans l'éditeur :
+
+pick a1b2c3d Ajouter le formulaire de connexion
+pick b2c3d4e WIP
+pick c3d4e5f fix typo
+pick d4e5f6g Ajouter les tests
+
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# d, drop <commit> = remove commit
+```
+```bash {4-6}
+$ git rebase -i HEAD~4
+# → dans l'éditeur :
+
+pick a1b2c3d Ajouter le formulaire de connexion
+pick b2c3d4e WIP
+pick c3d4e5f fix typo
+pick d4e5f6g Ajouter les tests
+
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# d, drop <commit> = remove commit
+```
+```bash {5,6}
+$ git rebase -i HEAD~4
+# → dans l'éditeur :
+
+pick a1b2c3d Ajouter le formulaire de connexion
+fixup b2c3d4e WIP
+fixup c3d4e5f fix typo
+pick d4e5f6g Ajouter les tests
+
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# d, drop <commit> = remove commit
+```
+```bash {2,3}
+$ git log --oneline
+e1f2a3b (HEAD -> feature/login) Ajouter les tests
+a1b2c3d Ajouter le formulaire de connexion
+9f9152a (main) Mettre à jour la doc
+7e2d3c1 Corriger la pagination
+3a8b4f0 Ajouter le module de paiement
+```
+````
 
 <!--
 Règle d'or : ne jamais rebase ce qui est déjà sur le remote partagé.
