@@ -51,7 +51,7 @@ layout: default
 - **Mettre de côté** — stash
 - **Préparer le commit** — add -p, add -N
 - **Rebase** — rebase -i, autoStash, update-refs
-- **Pousser** — pull.rebase, force-with-lease
+- **Pousser** — force-with-lease
 - **Conflits** — zdiff3, rerere
 - **Config & aliases** — gitignore global, includeIf, aliases
 
@@ -991,6 +991,7 @@ Envoyer son travail sur le remote
 
 ---
 layout: default
+disabled: true
 ---
 
 # `pull.rebase` — éviter les merge commits parasites
@@ -1027,6 +1028,8 @@ pull.rebase true : équivalent à toujours passer --rebase à git pull.
 Combine bien avec rebase.autoStash true pour ne pas bloquer sur des modifs non commitées.
 -->
 
+---
+layout: default
 ---
 
 # `push.autoSetupRemote`
