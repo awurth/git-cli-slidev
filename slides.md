@@ -1230,32 +1230,31 @@ layout: default
 
 # rerere — Reuse Recorded Resolution
 
-Git mémorise les résolutions de conflits pour les rejouer automatiquement.
+<br>
 
 ```bash
-# Activer rerere
 git config --global rerere.enabled true
-
-# Mettre à jour l'index automatiquement après résolution
 git config --global rerere.autoUpdate true
 ```
 
-<v-click>
+<br>
 
-**Cas d'usage typique :**
+````md magic-move
 ```bash
-# Branche longue qu'on rebase régulièrement sur main
-git rebase main    # → conflit sur src/Service/Auth.php
-# Résoudre le conflit manuellement → rerere enregistre
+git rebase main    # → conflit, résolu manuellement
+```
 
-# La semaine suivante, même rebase
+```bash
+git rebase main    # → conflit, résolu manuellement
+
+# Une semaine plus tard...
 git rebase main    # → rerere rejoue automatiquement ✅
 ```
+````
 
-```bash
-git rerere status  # voir les résolutions enregistrées
-git rerere diff    # voir ce que rerere va appliquer
-```
+<v-click>
+
+⚠️ Résolutions stockées en local (`.git/rr-cache`) — pas partagées entre devs
 
 </v-click>
 
