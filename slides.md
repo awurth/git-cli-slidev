@@ -99,20 +99,22 @@ Untracked files:
 </v-click>
 
 ---
-layout: center
-class: text-center
+layout: two-cols
 ---
 
-<h1 class="text-8xl font-mono">git diff</h1>
+<div class="h-full flex items-center justify-center">
 
----
-layout: image
-image: /git-diff-base.png
-backgroundSize: contain
----
+# `git diff`
 
-<div v-click class="absolute inset-0 flex items-center justify-center">
-  <div class="text-9xl">💩</div>
+</div>
+
+::right::
+
+<div class="relative h-full">
+  <img src="./git-diff-base.png" class="absolute inset-0 w-full h-full object-contain" />
+  <div v-click class="absolute inset-0 flex items-center justify-center">
+    <div class="text-9xl">💩</div>
+  </div>
 </div>
 
 ---
