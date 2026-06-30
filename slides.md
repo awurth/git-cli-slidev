@@ -1322,9 +1322,9 @@ layout: default
 
 # `includeIf` — config par contexte
 
-Adapter la config git selon le projet, sans tout mélanger.
+<br>
 
-```ini
+```ini {*|6-7}
 # ~/.gitconfig
 [user]
   name = Alexis Wurth
@@ -1346,9 +1346,11 @@ Adapter la config git selon le projet, sans tout mélanger.
   gpgSign = true
 ```
 
-**Autres conditions :** `gitdir:`, `onbranch:release/**`, `hasconfig:remote.*.url:`
+</v-click>
 
-> Une seule `~/.gitconfig`, comportements différents par projet.
+<v-click>
+
+**Autres conditions :** `gitdir:`, `onbranch:release/**`, `hasconfig:remote.*.url:`
 
 </v-click>
 
