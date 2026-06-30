@@ -53,7 +53,7 @@ layout: default
 - **Rebase** — rebase -i, autoStash, update-refs
 - **Pousser** — force-with-lease
 - **Conflits** — zdiff3, rerere
-- **Config & aliases** — gitignore global, includeIf, aliases
+- **Config & aliases** — includeIf, aliases
 
 </v-clicks>
 
@@ -1282,6 +1282,7 @@ git config --global help.autocorrect immediate
 
 ---
 layout: default
+disabled: true
 ---
 
 # `.gitignore` global
