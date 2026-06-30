@@ -840,10 +840,6 @@ a1b2c3d Ajouter le formulaire de connexion
 ```
 ````
 
-<!--
-Règle d'or : ne jamais rebase ce qui est déjà sur le remote partagé.
--->
-
 ---
 layout: default
 ---
@@ -880,41 +876,31 @@ s c3d4e5f [Alice @ 3 hours ago] fix typo
 
 </v-click>
 
-<!--
-Sur une branche de feature à plusieurs, l'auteur évite les mauvaises surprises.
--->
-
 ---
 
 # `rebase.autoStash`
-
-Lancer un rebase avec des modifications non commitées.
 
 ```bash
 git config --global rebase.autoStash true
 ```
 
-<v-click>
+<br>
 
-Sans autostash :
-```
-error: cannot rebase: You have unstaged changes.
-```
-
-</v-click>
-
-<v-click>
-
-Avec autostash, git fait automatiquement :
+````md magic-move
 ```bash
-git stash        # avant le rebase
-# ... rebase ...
-git stash pop    # après le rebase
+# Sans autoStash
+$ git rebase main
+error: cannot rebase: Your index contains uncommitted changes.
+error: Please commit or stash them.
 ```
-
-Fini les `git stash` manuels avant chaque rebase.
-
-</v-click>
+```bash
+# Avec autoStash
+$ git rebase main
+# git stash        ← automatique
+# ... rebase ...
+# git stash pop    ← automatique
+```
+````
 
 ---
 layout: two-cols
