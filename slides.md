@@ -46,14 +46,14 @@ layout: default
 
 <v-clicks>
 
-- **Regarder ses changements** — diff, delta, color-moved
-- **Naviguer** — switch/restore, branch -v
-- **Mettre de côté** — stash
-- **Préparer le commit** — add -p, add -N
-- **Rebase** — rebase -i, autoStash, update-refs
-- **Pousser** — force-with-lease
-- **Conflits** — zdiff3, rerere
-- **Config & aliases** — includeIf, aliases
+- **Regarder ses changements** <span class="text-sm text-gray-400">— diff, delta, color-moved</span>
+- **Naviguer** <span class="text-sm text-gray-400">— switch/restore, branch -v</span>
+- **Mettre de côté** <span class="text-sm text-gray-400">— stash</span>
+- **Préparer le commit** <span class="text-sm text-gray-400">— add -p, add -N</span>
+- **Réécrire l'historique** <span class="text-sm text-gray-400">— rebase -i, autoStash, update-refs</span>
+- **Pousser** <span class="text-sm text-gray-400">— force-with-lease</span>
+- **Conflits** <span class="text-sm text-gray-400">— zdiff3, rerere</span>
+- **Config & aliases** <span class="text-sm text-gray-400">— includeIf, aliases</span>
 
 </v-clicks>
 
@@ -664,9 +664,9 @@ git commit -v
 layout: section
 ---
 
-# Rebase
+# Réécrire l'historique
 
-Réécrire l'historique avant de pousser
+rebase -i, autoStash, update-refs
 
 ---
 layout: default
