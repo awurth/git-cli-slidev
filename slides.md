@@ -880,6 +880,8 @@ s c3d4e5f [Alice @ 3 hours ago] fix typo
 
 # `rebase.autoStash`
 
+<br>
+
 ```bash
 git config --global rebase.autoStash true
 ```
