@@ -965,30 +965,21 @@ layout: default
 
 <div class="text-orange-400 font-bold mb-4">⚠️ Expérimental — git 2.54+ requis (2026)</div>
 
-Deux nouvelles commandes de haut niveau pour réécrire l'historique.
+Réécrit l'historique sans `rebase -i`
+
+<br>
 
 ```bash
-# Renommer un commit sans passer par rebase -i
-git history reword a1b2c3d
-# → ouvre l'éditeur directement sur le message du commit
+git history reword a1b2c3d   # renommer le message
 ```
 
 ```bash
-# Découper un gros commit en plusieurs commits
-git history split a1b2c3d
-# → replace HEAD sur ce commit, vous permet de re-committer morceau par morceau
+git history split a1b2c3d    # découper en plusieurs commits
 ```
 
-<v-click>
-
-> Ces commandes sont encore en développement. L'API peut changer.
-
-</v-click>
-
-<!--
-reword évite d'ouvrir toute la liste des commits juste pour modifier un message — pas besoin d'ouvrir toute la liste.
-Introduites dans git 2.54 (2026). Vérifier disponibilité : git history --help
--->
+```bash
+git history fixup a1b2c3d    # git 2.55+ : commit les changements dans ce commit
+```
 
 ---
 layout: section
