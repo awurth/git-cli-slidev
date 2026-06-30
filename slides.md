@@ -328,36 +328,75 @@ git restore --staged src/foo.php
 layout: default
 ---
 
-# Le tiret `-` : branche précédente
+# `-` : branche précédente
 
-Fonctionne comme `cd -` dans le shell.
+<br>
 
+<v-click>
+
+**`git switch -`**
+
+````md magic-move
 ```bash
-git switch feature/foo
-# ... travail ...
-git switch main
-git switch -          # → retour sur feature/foo
+# Sur feature/foo — bug signalé sur fix/bug-123
+git switch fix/bug-123
 ```
 
 ```bash
-# Fonctionne aussi avec les anciennes commandes
-git checkout -
-git merge -           # merger la branche précédente
-git rebase -          # rebaser sur la branche précédente
+# Sur feature/foo — bug signalé sur fix/bug-123
+git switch fix/bug-123
+# ... correction ...
 ```
 
-<!--
-Cas concret : hotfix rapide
-git switch -c hotfix/urgent
-... correction ...
-git switch main
-git merge -           # merger hotfix depuis main
-git switch -          # retour sur sa branche de feature
--->
+```bash
+# Sur feature/foo — bug signalé sur fix/bug-123
+git switch fix/bug-123
+# ... correction ...
+git switch -          # retour sur feature/foo
+```
+````
 
-<!--
-Simple mais méconnu. Économise beaucoup de temps sur les allers-retours entre deux branches.
--->
+</v-click>
+
+<v-click>
+
+**`git rebase -`**
+
+````md magic-move
+```bash
+# Sur feature/foo — besoin de synchro avec main
+git switch main
+```
+
+```bash
+# Sur feature/foo — besoin de synchro avec main
+git switch main
+git pull
+```
+
+```bash
+# Sur feature/foo — besoin de synchro avec main
+git switch main
+git pull
+git switch -          # retour sur feature/foo
+```
+
+```bash
+# Sur feature/foo — besoin de synchro avec main
+git switch main
+git pull
+git switch -          # retour sur feature/foo
+git rebase -          # rebase sur main
+```
+````
+
+</v-click>
+
+<v-click>
+
+> Fonctionne avec `switch`, `checkout`, `merge`, `rebase`
+
+</v-click>
 
 ---
 layout: default
