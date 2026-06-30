@@ -905,12 +905,10 @@ $ git rebase main
 ````
 
 ---
-layout: two-cols
+layout: default
 ---
 
 # `rebase --update-refs`
-
-Branches empilées, `main` avance :
 
 ```
 main ── A ── A'
@@ -918,52 +916,36 @@ main ── A ── A'
                               └── feat-b ── D ── E
 ```
 
-Sans l'option, il faut rebaser chaque branche à la main, dans l'ordre :
+<br>
 
-```bash
-git rebase main feat-a
-git rebase feat-a feat-b
+<v-click>
+
+````md magic-move
+```bash {1,2|1,3|1,4}
+# Sans --update-refs
+git switch main && git pull
+git switch feat-a && git rebase main
+git switch feat-b && git rebase feat-a
 ```
-
-::right::
-
-<v-clicks>
-
-<div>
-
-**Avec `--update-refs`** : une seule commande depuis le sommet.
-
-```bash
+```bash {1,2|1,3}
+# Avec --update-refs
 git switch feat-b
 git rebase -i --update-refs main
 ```
-
-Lignes `u` insérées automatiquement :
-
-```{2}
+```bash {|1,3}
+# → dans l'éditeur :
 pick b3f1a2c Commit sur feat-a
 u refs/heads/feat-a
 pick d9e4b1f Commit sur feat-b
 pick a7c2d0e Autre commit feat-b
 ```
+````
 
-</div>
-
-<div>
-
-**Activer par défaut :**
-```bash
-git config --global rebase.updateRefs true
-```
-
-⚠️ Peut capturer des branches inattendues — vérifier les lignes `u` dans l'éditeur.
-
-</div>
-
-</v-clicks>
+</v-click>
 
 <!--
 Git 2.38+. Idéal pour les stacked PRs.
+⚠️ Peut capturer des branches inattendues — vérifier les lignes u dans l'éditeur.
 -->
 
 ---
