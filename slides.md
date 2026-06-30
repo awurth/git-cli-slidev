@@ -1189,13 +1189,15 @@ layout: two-cols-header
 
 # `merge.conflictStyle zdiff3`
 
-Mieux comprendre les conflits grâce au contexte ancêtre.
+```bash
+git config --global merge.conflictStyle zdiff3
+```
 
 ::left::
 
 **Style par défaut (`merge`) :**
 
-```
+```bash
 <<<<<<< HEAD
 return $user->getEmail();
 =======
@@ -1207,11 +1209,9 @@ return $user->getUsername();
 
 ::right::
 
-<v-click>
-
 **Avec `zdiff3` :**
 
-```
+```bash {*|3-4}
 <<<<<<< HEAD
 return $user->getEmail();
 ||||||| base
@@ -1221,13 +1221,9 @@ return $user->getUsername();
 >>>>>>> feature/login
 ```
 
-✅ Le bloc `|||||||` montre le code **avant** les deux modifications.
+<v-click>
 
-```bash
-git config --global merge.conflictStyle zdiff3
-```
-
-Disponible depuis git 2.35 (2022). `zdiff3` améliore `diff3` en réduisant les faux conflits.
+✅ Montre le code **avant** les deux modifications.
 
 </v-click>
 
