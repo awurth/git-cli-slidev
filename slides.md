@@ -45,7 +45,7 @@ layout: default
 
 <v-clicks>
 
-- **Regarder ses changements** — diff, delta, color-moved, log
+- **Regarder ses changements** — diff, delta, color-moved
 - **Naviguer** — switch/restore, branch -v
 - **Mettre de côté** — stash
 - **Préparer le commit** — add -p, add -N, commit.verbose
@@ -213,6 +213,7 @@ diff.colorMoved peut valoir : no, default, blocks, zebra, dimmed-zebra
 
 ---
 layout: default
+disabled: true
 ---
 
 # `git log` — options essentielles
