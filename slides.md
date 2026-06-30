@@ -1184,48 +1184,40 @@ layout: section
 Résoudre intelligemment
 
 ---
-layout: two-cols-header
+layout: default
 ---
 
 # `merge.conflictStyle zdiff3`
+
+<br>
 
 ```bash
 git config --global merge.conflictStyle zdiff3
 ```
 
-::left::
+<br>
 
-**Style par défaut (`merge`) :**
-
+````md magic-move
 ```bash
-<<<<<<< HEAD
+# Style par défaut (merge)
+<<<<<<< HEAD               # notre version
 return $user->getEmail();
 =======
 return $user->getUsername();
->>>>>>> feature/login
+>>>>>>> feature/login       # leur version
 ```
 
-😕 Impossible de savoir pourquoi ça a divergé.
-
-::right::
-
-**Avec `zdiff3` :**
-
-```bash {*|3-4}
-<<<<<<< HEAD
+```bash {*|1,4-5}
+# Style zdiff3
+<<<<<<< HEAD               # notre version
 return $user->getEmail();
-||||||| base
+||||||| base               # version commune avant divergence
 return $user->getName();
 =======
 return $user->getUsername();
->>>>>>> feature/login
+>>>>>>> feature/login       # leur version
 ```
-
-<v-click>
-
-✅ Montre le code **avant** les deux modifications.
-
-</v-click>
+````
 
 <!--
 zdiff3 = "zealous diff3". Moins de conflits parasites que diff3 classique.
