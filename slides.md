@@ -801,7 +801,9 @@ git rebase feat-a feat-b
 
 ::right::
 
-<v-click>
+<v-clicks>
+
+<div>
 
 **Avec `--update-refs`** : une seule commande depuis le sommet.
 
@@ -819,9 +821,9 @@ pick d9e4b1f Commit sur feat-b
 pick a7c2d0e Autre commit feat-b
 ```
 
-</v-click>
+</div>
 
-<v-click>
+<div>
 
 **Activer par défaut :**
 ```bash
@@ -830,7 +832,9 @@ git config --global rebase.updateRefs true
 
 ⚠️ Peut capturer des branches inattendues — vérifier les lignes `u` dans l'éditeur.
 
-</v-click>
+</div>
+
+</v-clicks>
 
 <!--
 Git 2.38+. Idéal pour les stacked PRs.
