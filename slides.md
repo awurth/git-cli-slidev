@@ -927,17 +927,26 @@ git switch main && git pull
 git switch feat-a && git rebase main
 git switch feat-b && git rebase feat-a
 ```
+
 ```bash {1,2|1,3}
 # Avec --update-refs
 git switch feat-b
 git rebase -i --update-refs main
 ```
+
 ```bash {|1,3}
 # → dans l'éditeur :
 pick b3f1a2c Commit sur feat-a
 u refs/heads/feat-a
 pick d9e4b1f Commit sur feat-b
 pick a7c2d0e Autre commit feat-b
+```
+
+```
+# → résultat :
+main ── A'
+         └── feat-a ── B' ── C'
+                              └── feat-b ── D' ── E'
 ```
 ````
 
