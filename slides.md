@@ -599,6 +599,8 @@ layout: default
 
 # `git add -N` — intention d'ajouter
 
+<br>
+
 ```bash
 $ git status
 Untracked files:
