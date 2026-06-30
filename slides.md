@@ -7,6 +7,7 @@ class: text-center
 transition: slide-left
 comark: true
 duration: 30min
+magicMoveDuration: 300
 ---
 
 # Apprendre à aimer Git en ligne de commande
