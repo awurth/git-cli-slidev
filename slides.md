@@ -1034,27 +1034,25 @@ layout: default
 
 # `push.autoSetupRemote`
 
-Fini le `git push -u origin HEAD` sur chaque nouvelle branche.
+<br>
 
-<v-click>
-
+**Le problème :**
 ```bash
-# Sans le réglage
 git switch -c ma-feature
-git push   # ✗ fatal: The current branch ma-feature has no upstream branch.
-           #   To push the current branch and set the remote as upstream, use
-           #   git push --set-upstream origin ma-feature
+git push
+# fatal: The current branch ma-feature has no upstream branch.
+
+git push --set-upstream origin ma-feature
 ```
 
-</v-click>
-
 <v-click>
 
+**La solution :**
 ```bash
 git config --global push.autoSetupRemote true
 
 git switch -c ma-feature
-git push   # ✓ push + tracking configuré automatiquement
+git push
 ```
 
 </v-click>
