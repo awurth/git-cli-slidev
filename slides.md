@@ -48,7 +48,7 @@ layout: default
 - **Regarder ses changements** — diff, delta, color-moved
 - **Naviguer** — switch/restore, branch -v
 - **Mettre de côté** — stash
-- **Préparer le commit** — add -p, add -N, commit.verbose
+- **Préparer le commit** — add -p, add -N
 - **Rebase** — rebase -i, autoStash, update-refs
 - **Pousser** — pull.rebase, force-with-lease
 - **Conflits** — zdiff3, rerere
@@ -633,32 +633,31 @@ git add -p            # indexer sélectivement
 
 ---
 layout: default
+disabled: true
 ---
 
 # `commit.verbose` — voir le diff dans l'éditeur
 
-Par défaut, l'éditeur de commit ne montre rien du tout.
-
 ```bash
-# Ponctuellement
+git config --global commit.verbose true
+# ou
 git commit -v
-git commit --verbose
 ```
 
 <v-click>
 
-```bash
-# Toujours actif
-git config --global commit.verbose true
-```
-
-L'éditeur affiche le diff complet sous le message — plus besoin d'un terminal séparé pour se rappeler ce qu'on committe.
+<div class="flex gap-4 mt-4">
+  <div class="flex-1 text-center">
+    <div class="text-sm text-gray-500 mb-1">Sans <code>-v</code></div>
+    <img src="./commit-v-without.png" class="rounded shadow" />
+  </div>
+  <div class="flex-1 text-center">
+    <div class="text-sm text-gray-500 mb-1">Avec <code>-v</code></div>
+    <img src="./commit-v-with.png" class="rounded shadow" />
+  </div>
+</div>
 
 </v-click>
-
-<!--
-Particulièrement utile pour les commits multi-fichiers : on écrit un message précis en voyant exactement ce qui part.
--->
 
 ---
 layout: section
