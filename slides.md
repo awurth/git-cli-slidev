@@ -405,42 +405,47 @@ layout: default
 
 # `git branch -v`
 
-Voir l'état de ses branches en un coup d'œil.
+<br>
+
+````md magic-move
+```bash
+git branch
+#   feature/auth
+#   feature/search
+# * main
+#   hotfix/login
+#   old-feature
+```
 
 ```bash
 git branch -v
+#   feature/auth   a3f2e1c Add JWT middleware
+#   feature/search 8b4d2f0 WIP: elastic integration
+# * main           c1e9a4b Merge pull request #42
+#   hotfix/login   f2a1c3d Fix session timeout
+#   old-feature    f2a1c3d [gone] WIP
 ```
-
-```
-  feature/auth     a3f2e1c Add JWT middleware
-  feature/search   8b4d2f0 WIP: elastic integration
-* main             c1e9a4b Merge pull request #42
-  hotfix/login     f2a1c3d Fix session timeout
-  old-feature      f2a1c3d [gone] WIP
-```
-
-<v-clicks>
 
 ```bash
-# -vv : voir aussi le tracking remote
 git branch -vv
+#   feature/auth   a3f2e1c [origin/feature/auth] Add JWT middleware
+#   feature/search 8b4d2f0 [origin/feature/search: ahead 2] WIP: elastic integration
+# * main           c1e9a4b [origin/main: behind 3] Merge pull request #42
+#   hotfix/login   f2a1c3d [origin/hotfix/login] Fix session timeout
+#   old-feature    f2a1c3d [origin/old-feature: gone] WIP
 ```
+````
 
-```
-  feature/auth  a3f2e1c [origin/feature/auth] Add JWT middleware
-* main          c1e9a4b [origin/main: behind 3] Merge pull request #42
-  old-feature   f2a1c3d [origin/old-feature: gone] WIP
-```
+<br>
+
+<v-click>
 
 ```bash
 # Trier par date de dernier commit
-git branch --sort=-committerdate -v
-
-# Activer par défaut
 git config --global branch.sort -committerdate
 ```
 
-</v-clicks>
+</v-click>
 
 <!--
 branch -vv révèle aussi les branches qui ont divergé du remote. Très utile en équipe.
