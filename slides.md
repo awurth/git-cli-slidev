@@ -1097,6 +1097,81 @@ git config --global push.useForceIfIncludes true
 <!--
 force-with-lease existe depuis git 1.8.5 (2013). Pas d'excuse pour utiliser --force.
 force-if-includes : protection supplémentaire si le fetch a été fait mais pas intégré.
+Lease = la valeur de la branche distante connue localement (remote-tracking ref).
+-->
+
+---
+layout: two-cols-header
+disabled: true
+---
+
+# `push --force-if-includes`
+
+La faille que `--force-with-lease` seul ne couvre pas.
+
+<v-click>
+
+````md magic-move
+```
+origin/main  ── A ── B
+main (local) ── A ── B
+```
+```
+# Bob pousse C
+origin/main  ── A ── B ── C
+main (local) ── A ── B
+```
+```
+# Alice fetch → son origin/main connu passe à C
+origin/main  ── A ── B ── C
+main (local) ── A ── B
+```
+```
+# Alice commit D, base = B (pas C !)
+origin/main  ── A ── B ── C
+main (local) ── A ── B ── D
+```
+````
+
+</v-click>
+
+::left::
+
+**Sans `--force-if-includes` :**
+```bash
+git push --force-with-lease
+```
+```
+# Lease == C (à jour grâce au fetch) → accepté
+origin/main ── A ── B ── D
+
+😱 C a disparu, jamais intégré
+```
+
+::right::
+
+<v-click>
+
+**Avec `--force-if-includes` :**
+```bash
+git push --force-with-lease --force-if-includes
+```
+```
+# C n'est pas ancêtre de D → REJET
+origin/main ── A ── B ── C
+
+✅ C préservé, push refusé
+```
+
+```bash
+# Activer automatiquement
+git config --global push.useForceIfIncludes true
+```
+
+</v-click>
+
+<!--
+force-if-includes : vérifie que les commits distants connus (via reflog) sont des ancêtres de l'historique poussé, pas juste que la lease correspond.
 push.useForceIfIncludes : active --force-if-includes automatiquement sur tous les push --force-with-lease.
 -->
 
