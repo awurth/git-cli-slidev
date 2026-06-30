@@ -1069,7 +1069,7 @@ layout: default
 
 # `push --force-with-lease`
 
-`git push --force` devrait presque toujours être remplacé.
+<br>
 
 <v-click>
 
@@ -1079,17 +1079,17 @@ layout: default
 git push --force   # ← Alice écrase le commit de Bob silencieusement
 ```
 
+</v-click>
+
+<v-click>
+
 **La solution :**
-```bash
+```bash {1-2|4-5}
 git push --force-with-lease --force-if-includes
-# Si quelqu'un a poussé entre-temps → REJET avec erreur claire
+# Si quelqu'un a poussé entre-temps → REJET
 
-# Activer --force-if-includes automatiquement (git 2.30+, 2020)
+# Activer --force-if-includes automatiquement
 git config --global push.useForceIfIncludes true
-
-# Alias indispensable
-git config --global alias.pf "push --force-with-lease"
-git pf
 ```
 
 </v-click>
