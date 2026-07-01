@@ -925,10 +925,12 @@ layout: default
 
 # `rebase --update-refs`
 
-```
+<br>
+
+```bash
 main ── A ── A'
-         └── feat-a ── B ── C
-                              └── feat-b ── D ── E
+        └── feat-a ── B ── C
+                           └── feat-b ── D ── E
 ```
 
 <br>
@@ -949,7 +951,11 @@ git switch feat-b
 git rebase -i --update-refs main
 ```
 
-```bash {|1,3}
+```bash {3-9|3,5,7}
+# Avec --update-refs
+git switch feat-b
+git rebase -i --update-refs main
+
 # → dans l'éditeur :
 pick b3f1a2c Commit sur feat-a
 u refs/heads/feat-a
@@ -957,11 +963,15 @@ pick d9e4b1f Commit sur feat-b
 pick a7c2d0e Autre commit feat-b
 ```
 
-```
+```bash {3,5-8}
+# Avec --update-refs
+git switch feat-b
+git rebase -i --update-refs main
+
 # → résultat :
-main ── A'
-         └── feat-a ── B' ── C'
-                              └── feat-b ── D' ── E'
+main ── A ── A'
+             └── feat-a ── B' ── C'
+                                 └── feat-b ── D' ── E'
 ```
 ````
 
