@@ -44,19 +44,20 @@ layout: default
 
 <v-clicks>
 
-- **Regarder ses changements** <span class="text-sm text-gray-400">— diff, delta, color-moved</span>
-- **Naviguer** <span class="text-sm text-gray-400">— switch/restore, branch -v</span>
-- **Mettre de côté** <span class="text-sm text-gray-400">— stash</span>
-- **Préparer le commit** <span class="text-sm text-gray-400">— add -p, add -N</span>
-- **Réécrire l'historique** <span class="text-sm text-gray-400">— rebase -i, autoStash, update-refs</span>
-- **Pousser** <span class="text-sm text-gray-400">— force-with-lease</span>
-- **Conflits** <span class="text-sm text-gray-400">— zdiff3, rerere</span>
-- **Config & aliases** <span class="text-sm text-gray-400">— includeIf, aliases</span>
+- **<Link to="changements">Regarder ses changements</Link>** <span class="text-sm text-gray-400">— diff, delta, color-moved</span>
+- **<Link to="naviguer">Naviguer</Link>** <span class="text-sm text-gray-400">— switch/restore, branch -v</span>
+- **<Link to="stash">Mettre de côté</Link>** <span class="text-sm text-gray-400">— stash</span>
+- **<Link to="commit">Préparer le commit</Link>** <span class="text-sm text-gray-400">— add -p, add -N</span>
+- **<Link to="historique">Réécrire l'historique</Link>** <span class="text-sm text-gray-400">— rebase -i, autoStash, update-refs</span>
+- **<Link to="pousser">Pousser</Link>** <span class="text-sm text-gray-400">— force-with-lease</span>
+- **<Link to="conflits">Conflits</Link>** <span class="text-sm text-gray-400">— zdiff3, rerere</span>
+- **<Link to="config">Config & aliases</Link>** <span class="text-sm text-gray-400">— includeIf, aliases</span>
 
 </v-clicks>
 
 ---
 layout: section
+routeAlias: changements
 ---
 
 # Regarder ses changements
@@ -261,6 +262,7 @@ Les deux peuvent être lents sur un gros dépôt : limiter avec --since, -n ou -
 
 ---
 layout: section
+routeAlias: naviguer
 ---
 
 # Naviguer
@@ -456,6 +458,7 @@ branch -vv révèle aussi les branches qui ont divergé du remote. Très utile e
 
 ---
 layout: section
+routeAlias: stash
 ---
 
 # Mettre de côté
@@ -504,6 +507,7 @@ git config --global stash.index true
 
 ---
 layout: section
+routeAlias: commit
 ---
 
 # Préparer un commit
@@ -640,6 +644,7 @@ git commit -v
 
 ---
 layout: section
+routeAlias: historique
 ---
 
 # Réécrire l'historique
@@ -986,6 +991,7 @@ git history fixup a1b2c3d    # git 2.55+ : commit les changements dans ce commit
 
 ---
 layout: section
+routeAlias: pousser
 ---
 
 # Pousser
@@ -1183,6 +1189,7 @@ push.useForceIfIncludes : active --force-if-includes automatiquement sur tous le
 
 ---
 layout: section
+routeAlias: conflits
 ---
 
 # Gérer les conflits
@@ -1273,6 +1280,7 @@ Si vous avez souvent des conflits difficiles à gérer lors des rebases, regarde
 
 ---
 layout: section
+routeAlias: config
 ---
 
 # Configurer son environnement
