@@ -996,6 +996,14 @@ main ── A ── A'
 
 </v-click>
 
+<v-click>
+
+```bash
+git push --force-with-lease origin feat-a feat-b
+```
+
+</v-click>
+
 <!--
 Git 2.38+. Idéal pour les stacked PRs.
 ⚠️ Peut capturer des branches inattendues — vérifier les lignes u dans l'éditeur.
