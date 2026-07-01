@@ -894,21 +894,30 @@ git config --global rebase.autoStash true
 
 <br>
 
-````md magic-move
+<v-click>
+
+**Sans autoStash**
+
 ```bash
-# Sans autoStash
 $ git rebase main
 error: cannot rebase: Your index contains uncommitted changes.
 error: Please commit or stash them.
 ```
+
+</v-click>
+
+<v-click>
+
+**Avec autoStash**
+
 ```bash
-# Avec autoStash
 $ git rebase main
 # git stash        ← automatique
 # ... rebase ...
 # git stash pop    ← automatique
 ```
-````
+
+</v-click>
 
 ---
 layout: default
