@@ -1429,3 +1429,12 @@ fetch.pruneTags : disponible depuis git 2.17 (2018).
 - `git rebase --onto` — transplanter des commits d'une base vers une autre (branche depuis la mauvaise base, supprimer des commits au milieu)
 
 </v-clicks>
+
+---
+layout: center
+class: text-center
+---
+
+# Merci !
+
+<img src="./qr-slides.png" class="mt-8 mx-auto h-32" alt="Slides" />
