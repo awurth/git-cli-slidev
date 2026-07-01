@@ -858,22 +858,27 @@ git config --global rebase.abbreviateCommands true
 git config --global rebase.instructionFormat "[%an @ %ar] %s"
 ```
 
-<br>
-
 <v-click>
 
-````md magic-move
+**Avant**
+
 ```bash
 pick a1b2c3d Ajouter le formulaire de connexion
 pick b2c3d4e WIP
 squash c3d4e5f fix typo
 ```
+
+</v-click>
+
+<v-click>
+
+**Après**
+
 ```bash
 p a1b2c3d [Alice @ 2 days ago] Ajouter le formulaire de connexion
 p b2c3d4e [Bob @ 5 hours ago] WIP
 s c3d4e5f [Alice @ 3 hours ago] fix typo
 ```
-````
 
 </v-click>
 
