@@ -535,7 +535,7 @@ stash@{0}: On main: wip: nouvelle feature
 <v-click>
 
 ```bash
-# Restaurer aussi l'état staged/unstaged (sinon perdu au pop)
+# Restaurer aussi l'état staged/unstaged (sinon perdu au pop/apply)
 git config --global stash.index true
 ```
 
