@@ -1,6 +1,6 @@
 ---
 theme: default
-background: https://cover.sli.dev
+background: /background.webp
 title: 'Apprendre à aimer Git en ligne de commande'
 info: false
 class: text-center
@@ -12,11 +12,9 @@ magicMoveDuration: 300
 
 # Apprendre à aimer Git en ligne de commande
 
-Les commandes, options et réglages méconnues mais très utiles au quotidien
+<br>
 
-<div class="pt-8 text-gray-400">
-  Alexis Wurth · SensioLabs
-</div>
+Les commandes, options et réglages méconnus<br>mais très utiles au quotidien
 
 <!--
 Intro : qui utilise git en CLI ? Qui utilise uniquement l'interface graphique ?
