@@ -197,11 +197,11 @@ git config --global diff.colorMovedWS allow-indentation-change # ou ignore-all-s
 
 <div class="flex gap-4 mt-4">
   <div class="flex-1 text-center">
-    <div class="text-sm text-gray-500 mb-1">Sans <code>--color-moved</code></div>
+    <div class="text-sm text-gray-500 mb-1">Sans <code>diff.colorMoved</code></div>
     <img src="./color-moved-without.png" class="rounded shadow" />
   </div>
   <div class="flex-1 text-center">
-    <div class="text-sm text-gray-500 mb-1">Avec <code>--color-moved</code></div>
+    <div class="text-sm text-gray-500 mb-1">Avec <code>diff.colorMoved</code></div>
     <img src="./color-moved-with.png" class="rounded shadow" />
   </div>
 </div>
