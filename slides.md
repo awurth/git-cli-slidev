@@ -675,7 +675,7 @@ layout: default
 # Rebase interactif
 
 ````md magic-move
-```bash
+```bash {*|2-5}
 $ git log --oneline
 d4e5f6g (HEAD -> feature/login) Ajouter les tests
 c3d4e5f fix typo
@@ -685,7 +685,7 @@ a1b2c3d Ajouter le formulaire de connexion
 7e2d3c1 Corriger la pagination
 3a8b4f0 Ajouter le module de paiement
 ```
-```bash {2-5}
+```bash {2-5,10}
 $ git log --oneline
 d4e5f6g (HEAD -> feature/login) Ajouter les tests
 c3d4e5f fix typo
@@ -694,8 +694,7 @@ a1b2c3d Ajouter le formulaire de connexion
 9f9152a (main) Mettre à jour la doc
 7e2d3c1 Corriger la pagination
 3a8b4f0 Ajouter le module de paiement
-```
-```bash
+
 $ git rebase -i HEAD~4
 ```
 ```bash
