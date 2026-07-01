@@ -457,6 +457,42 @@ branch -vv révèle aussi les branches qui ont divergé du remote. Très utile e
 -->
 
 ---
+layout: default
+---
+
+# `fetch.prune` — Rester en sync avec le remote
+
+<br>
+
+```bash
+git fetch --prune
+git branch -v
+#   old-feature  f2a1c3d [gone] WIP
+```
+
+<br>
+
+<v-click>
+
+```bash
+# Supprimer toutes les branches locales dont le remote est gone
+git branch -v | grep -F '[gone]' | cut -f 3 -d ' ' | xargs git branch -D
+```
+
+</v-click>
+
+<br>
+
+<v-click>
+
+```bash
+# En config, pour ne plus avoir à penser à --prune
+git config --global fetch.prune true
+```
+
+</v-click>
+
+---
 layout: section
 routeAlias: stash
 ---
@@ -1371,49 +1407,6 @@ layout: default
 <!--
 Disponible depuis git 2.13 (2017). Très utile pour séparer config perso et pro.
 Le trailing slash dans gitdir: est important : ~/work/ matche tout ce qui est dans ce dossier.
--->
-
----
-layout: default
----
-
-# `fetch.prune` — Rester en sync avec le remote
-
-Les branches supprimées sur le remote restent visibles localement par défaut.
-
-```bash
-git branch -vv
-#   old-feature  f2a1c3d [origin/old-feature: gone] WIP  ← branche fantôme
-```
-
-<v-click>
-
-```bash
-# Nettoyer manuellement
-git fetch --prune
-
-# Activer en config
-git config --global fetch.prune true
-git config --global fetch.pruneTags true
-```
-
-> `fetch.prune true` = le remote fait loi. Fini les branches fantômes.
-
-</v-click>
-
-<v-click>
-
-```bash
-# Supprimer toutes les branches locales dont le remote est gone
-git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
-```
-
-</v-click>
-
-<!--
-Sans fetch.prune, git branch -r affiche des branches supprimées indéfiniment.
-fetch.pruneTags : disponible depuis git 2.17 (2018).
--D : force la suppression même si non mergée.
 -->
 
 ---
