@@ -1109,6 +1109,8 @@ git push --force   # ← Alice écrase le commit de Bob silencieusement
 <v-click>
 
 **La solution :**
+
+````md magic-move
 ```bash {1-2|4-5}
 git push --force-with-lease --force-if-includes
 # Si quelqu'un a poussé entre-temps → REJET
@@ -1116,6 +1118,7 @@ git push --force-with-lease --force-if-includes
 # Activer --force-if-includes automatiquement
 git config --global push.useForceIfIncludes true
 ```
+````
 
 </v-click>
 
