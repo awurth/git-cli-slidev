@@ -1033,6 +1033,17 @@ git history split a1b2c3d    # découper en plusieurs commits
 git history fixup a1b2c3d    # git 2.55+ : commit les changements dans ce commit
 ```
 
+<br>
+
+<v-click>
+
+```bash
+# Historique réécrit → push force nécessaire
+git push --force-with-lease
+```
+
+</v-click>
+
 ---
 layout: section
 routeAlias: pousser
