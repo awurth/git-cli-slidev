@@ -674,6 +674,8 @@ layout: default
 
 # Rebase interactif
 
+<br>
+
 ````md magic-move
 ```bash {*|2-5}
 $ git log --oneline
