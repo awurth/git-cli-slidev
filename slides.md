@@ -1037,7 +1037,7 @@ layout: default
 
 **Le problème :**
 ```bash
-git switch -c ma-feature
+git switch --create ma-feature
 git push
 # fatal: The current branch ma-feature has no upstream branch.
 
@@ -1050,7 +1050,7 @@ git push --set-upstream origin ma-feature
 ```bash
 git config --global push.autoSetupRemote true
 
-git switch -c ma-feature
+git switch --create ma-feature
 git push
 ```
 
