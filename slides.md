@@ -468,26 +468,25 @@ layout: default
 
 <br>
 
+**Avant**
+
 ```bash
-# Inclure les fichiers non-trackés
-git stash push -u
+$ git stash push
 
-# Nommer son stash
-git stash push -m "wip: refacto contrôleur user"
-
-# Tout combiner
-git stash push -u -m "wip: nouvelle feature"
+$ git stash list
+stash@{0}: WIP on main: abc1234 fix login
 ```
-
-<br>
 
 <v-click>
 
+**Après**
+
 ```bash
-# git stash list — les noms rendent la liste lisible
-stash@{0}: On main: wip: refacto contrôleur user
-stash@{1}: On main: wip: nouvelle feature
-# Sans -m → stash@{2}: WIP on main: abc1234 fix login
+# -u : inclut aussi les fichiers non-trackés
+$ git stash push -u -m "wip: nouvelle feature"
+
+$ git stash list
+stash@{0}: On main: wip: nouvelle feature
 ```
 
 </v-click>
@@ -502,10 +501,6 @@ git config --global stash.index true
 ```
 
 </v-click>
-
-<!--
-stash.index = true évite de devoir taper --index à chaque pop/apply : restaure l'état staged/unstaged automatiquement.
--->
 
 ---
 layout: section
