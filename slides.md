@@ -464,7 +464,9 @@ Changer de contexte sans perdre son travail
 layout: default
 ---
 
-# `git stash push` — options utiles
+# `git stash` — push et pop
+
+<br>
 
 ```bash
 # Inclure les fichiers non-trackés
@@ -477,6 +479,8 @@ git stash push -m "wip: refacto contrôleur user"
 git stash push -u -m "wip: nouvelle feature"
 ```
 
+<br>
+
 <v-click>
 
 ```bash
@@ -488,40 +492,19 @@ stash@{1}: On main: wip: nouvelle feature
 
 </v-click>
 
-<!--
--u : évite la surprise de perdre des fichiers non-trackés quand on change de branche
-Nommer ses stashs = indispensable dès qu'on en accumule plusieurs
--->
-
----
-layout: default
----
-
-# `git stash pop` — restaurer l'état exact
-
-```bash
-# Restaurer aussi l'état staged/unstaged
-git stash pop --index
-
-# Ou en config pour ne jamais y penser
-git config --global stash.index true
-```
-
-> `stash.index true` = `--index` automatique à chaque pop/apply.
+<br>
 
 <v-click>
 
 ```bash
-# Alias — ne plus jamais oublier -u et -m
-git config --global alias.sw '!git stash push -u -m'
-# Usage : git sw "wip: ma feature"
+# Restaurer aussi l'état staged/unstaged (sinon perdu au pop)
+git config --global stash.index true
 ```
 
 </v-click>
 
 <!--
 stash.index = true évite de devoir taper --index à chaque pop/apply : restaure l'état staged/unstaged automatiquement.
-L'alias sw (stash work) rend le flux naturel : git sw "contexte", git stash pop.
 -->
 
 ---
