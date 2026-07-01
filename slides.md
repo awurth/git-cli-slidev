@@ -470,8 +470,6 @@ layout: default
 
 <br>
 
-**Avant**
-
 ```bash
 $ git stash push
 
@@ -481,7 +479,7 @@ stash@{0}: WIP on main: abc1234 fix login
 
 <v-click>
 
-**Après**
+<div class="text-center text-3xl my-2">↓</div>
 
 ```bash
 # -u : inclut aussi les fichiers non-trackés
