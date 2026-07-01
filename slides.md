@@ -184,6 +184,8 @@ layout: default
 
 # `diff.colorMoved`
 
+<br>
+
 ```bash
 git config --global diff.colorMoved default
 git config --global diff.colorMovedWS allow-indentation-change # ou ignore-all-space
