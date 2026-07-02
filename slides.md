@@ -50,7 +50,7 @@ layout: default
 - **<Link to="commit">Préparer le commit</Link>** <span class="text-sm text-gray-400">— add -p, add -N</span>
 - **<Link to="historique">Réécrire l'historique</Link>** <span class="text-sm text-gray-400">— rebase -i, autoStash, update-refs, git history</span>
 - **<Link to="pousser">Pousser</Link>** <span class="text-sm text-gray-400">— autoSetupRemote, force-with-lease</span>
-- **<Link to="conflits">Conflits</Link>** <span class="text-sm text-gray-400">— zdiff3, rerere</span>
+- **<Link to="conflits">Gérer les conflits</Link>** <span class="text-sm text-gray-400">— zdiff3, rerere</span>
 - **<Link to="config">Configurer son environnement</Link>** <span class="text-sm text-gray-400">— includeIf, récap .gitconfig</span>
 
 </v-clicks>
