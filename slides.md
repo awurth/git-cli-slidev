@@ -1480,16 +1480,18 @@ core.pager : delta choisi ici, mais diff-so-fancy est l'alternative montrée plu
 -->
 
 ---
+disabled: true
+---
 
 # À découvrir aussi
 
 <v-clicks>
 
-- `git config --global diff.algorithm histogram` — algorithme de diff plus lisible sur certains fichiers
-- `git commit --fixup` — créer automatiquement un commit de correction pour l'autosquash
-- `git bisect` — trouver le commit qui a introduit un bug par dichotomie
-- `git worktree` — plusieurs branches en parallèle dans des dossiers séparés
-- `git rebase --onto` — transplanter des commits d'une base vers une autre (branche depuis la mauvaise base, supprimer des commits au milieu)
+- `git config --global diff.algorithm histogram` — diff plus lisible
+- `git commit --fixup` / `--squash` — commit de correction auto pour l'autosquash
+- `git bisect` — trouve le commit fautif par dichotomie
+- `git worktree` — plusieurs branches en parallèle, dossiers séparés
+- `git rebase --onto` — transplante des commits vers une autre base
 
 </v-clicks>
 
