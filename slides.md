@@ -35,7 +35,7 @@ L'objectif aujourd'hui c'est de vous donner des outils concrets pour aller plus 
 </div>
 
 <img src="./sensiolabs.png" class="absolute bottom-10 right-12 h-14" alt="SensioLabs" />
-<img src="./qr-slides.svg" class="absolute bottom-10 left-12 h-14" alt="Slides" />
+<img src="./qr-slides.svg" class="absolute bottom-10 left-12 h-24" alt="Slides" />
 
 ---
 layout: default
