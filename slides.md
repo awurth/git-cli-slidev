@@ -51,7 +51,7 @@ layout: default
 - **<Link to="historique">Réécrire l'historique</Link>** <span class="text-sm text-gray-400">— rebase -i, autoStash, update-refs, git history</span>
 - **<Link to="pousser">Pousser</Link>** <span class="text-sm text-gray-400">— autoSetupRemote, force-with-lease</span>
 - **<Link to="conflits">Conflits</Link>** <span class="text-sm text-gray-400">— zdiff3, rerere</span>
-- **<Link to="config">Configurer son environnement</Link>** <span class="text-sm text-gray-400">— includeIf</span>
+- **<Link to="config">Configurer son environnement</Link>** <span class="text-sm text-gray-400">— includeIf, récap .gitconfig</span>
 
 </v-clicks>
 
@@ -1415,7 +1415,7 @@ Le trailing slash dans gitdir: est important : ~/work/ matche tout ce qui est da
 layout: two-cols-header
 ---
 
-# Récap : `~/.gitconfig`
+# `~/.gitconfig`
 
 ::left::
 
