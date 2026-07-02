@@ -598,14 +598,6 @@ layout: default
 layout: default
 ---
 
-# `git add -p` — éditer un hunk manuellement
-
-<img src="./add-p-e.png" class="mt-4 max-h-96 rounded shadow mx-auto" />
-
----
-layout: default
----
-
 # `git add -p` — résultat
 
 <img src="./add-p-after.png" class="mt-4 max-h-96 rounded shadow mx-auto" />
