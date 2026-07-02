@@ -1412,6 +1412,65 @@ Le trailing slash dans gitdir: est important : ~/work/ matche tout ce qui est da
 -->
 
 ---
+layout: two-cols-header
+---
+
+# Récap : `~/.gitconfig`
+
+::left::
+
+```ini
+[status]
+    showUntrackedFiles = all
+
+[core]
+    pager = delta
+
+[diff]
+    colorMoved = default
+    colorMovedWS = allow-indentation-change
+
+[interactive]
+    diffFilter = delta --color-only
+
+[branch]
+    sort = -committerdate
+
+[fetch]
+    prune = true
+
+[stash]
+    index = true
+```
+
+::right::
+
+```ini
+[rebase]
+    abbreviateCommands = true
+    instructionFormat = [%an @ %ar] %s
+    autoStash = true
+
+[push]
+    autoSetupRemote = true
+    useForceIfIncludes = true
+
+[merge]
+    conflictStyle = zdiff3
+
+[rerere]
+    enabled = true
+    autoUpdate = true
+
+[includeIf "gitdir:~/Projects/sensiolabs/"]
+    path = ~/.gitconfig-work
+```
+
+<!--
+core.pager : delta choisi ici, mais diff-so-fancy est l'alternative montrée plus tôt (les deux ne peuvent pas coexister).
+-->
+
+---
 
 # À découvrir aussi
 
