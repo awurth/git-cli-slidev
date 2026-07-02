@@ -46,8 +46,7 @@ layout: default
 <v-clicks>
 
 - **<Link to="changements">Regarder ses changements</Link>** <span class="text-sm text-gray-400">— diff, delta, color-moved</span>
-- **<Link to="naviguer">Naviguer</Link>** <span class="text-sm text-gray-400">— switch/restore, branch -v</span>
-- **<Link to="stash">Mettre de côté</Link>** <span class="text-sm text-gray-400">— stash</span>
+- **<Link to="naviguer">Naviguer</Link>** <span class="text-sm text-gray-400">— switch/restore, branch -v, stash</span>
 - **<Link to="commit">Préparer le commit</Link>** <span class="text-sm text-gray-400">— add -p, add -N</span>
 - **<Link to="historique">Réécrire l'historique</Link>** <span class="text-sm text-gray-400">— rebase -i, autoStash, update-refs</span>
 - **<Link to="pousser">Pousser</Link>** <span class="text-sm text-gray-400">— force-with-lease</span>
@@ -492,15 +491,6 @@ git config --global fetch.prune true
 ```
 
 </v-click>
-
----
-layout: section
-routeAlias: stash
----
-
-# Mettre de côté
-
-Changer de contexte sans perdre son travail
 
 ---
 layout: default
