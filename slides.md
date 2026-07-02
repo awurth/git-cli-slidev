@@ -8,7 +8,6 @@ transition: slide-left
 comark: true
 duration: 30min
 magicMoveDuration: 300
-routerMode: hash
 ---
 
 # Apprendre à aimer Git en ligne de commande
