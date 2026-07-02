@@ -43,9 +43,11 @@ layout: default
 
 # Au programme
 
+<br>
+
 <v-clicks>
 
-- **<Link to="changements">Regarder ses changements</Link>** <span class="text-sm text-gray-400">— diff, delta, color-moved</span>
+- **<Link to="changements">Explorer ses changements</Link>** <span class="text-sm text-gray-400">— status, diff, delta, color-moved</span>
 - **<Link to="naviguer">Naviguer</Link>** <span class="text-sm text-gray-400">— switch/restore, branch -v, fetch.prune, stash</span>
 - **<Link to="commit">Préparer le commit</Link>** <span class="text-sm text-gray-400">— add -p, add -N</span>
 - **<Link to="historique">Réécrire l'historique</Link>** <span class="text-sm text-gray-400">— rebase -i, autoStash, update-refs, git history</span>
@@ -60,8 +62,9 @@ layout: section
 routeAlias: changements
 ---
 
-# Regarder ses changements
+# Explorer ses changements
 
+Lire un diff clairement
 
 ---
 layout: default
