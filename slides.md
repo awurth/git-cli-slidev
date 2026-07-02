@@ -50,10 +50,10 @@ layout: default
 - **<Link to="changements">Explorer ses changements</Link>** <span class="text-sm text-gray-400">— status, diff, delta, color-moved</span>
 - **<Link to="naviguer">Naviguer</Link>** <span class="text-sm text-gray-400">— switch/restore, branch -v, fetch.prune, stash</span>
 - **<Link to="commit">Préparer le commit</Link>** <span class="text-sm text-gray-400">— add -p, add -N</span>
-- **<Link to="historique">Réécrire l'historique</Link>** <span class="text-sm text-gray-400">— rebase -i, autoStash, update-refs, git history</span>
+- **<Link to="historique">Réécrire l'historique</Link>** <span class="text-sm text-gray-400">— rebase -i, autoStash, update-refs, history</span>
 - **<Link to="pousser">Pousser</Link>** <span class="text-sm text-gray-400">— autoSetupRemote, force-with-lease</span>
 - **<Link to="conflits">Gérer les conflits</Link>** <span class="text-sm text-gray-400">— zdiff3, rerere</span>
-- **<Link to="config">Configurer son environnement</Link>** <span class="text-sm text-gray-400">— includeIf, récap .gitconfig</span>
+- **<Link to="config">Configurer son environnement</Link>** <span class="text-sm text-gray-400">— includeIf, config finale</span>
 
 </v-clicks>
 
@@ -71,6 +71,8 @@ layout: default
 ---
 
 # `status.showUntrackedFiles`
+
+<br>
 
 ```bash
 $ git status
@@ -552,7 +554,11 @@ layout: default
 
 Sélectionner les hunks (gros morceaux) à indexer un par un.
 
+<v-click>
+
 <img src="./add-p-before.png" class="mt-4 max-h-32 rounded shadow mx-auto" />
+
+</v-click>
 
 <v-click>
 
