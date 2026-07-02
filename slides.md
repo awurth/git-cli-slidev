@@ -35,7 +35,7 @@ L'objectif aujourd'hui c'est de vous donner des outils concrets pour aller plus 
 </div>
 
 <img src="./sensiolabs.png" class="absolute bottom-10 right-12 h-14" alt="SensioLabs" />
-<img src="./qr-slides.svg" class="absolute bottom-10 left-12 h-24" alt="Slides" />
+<img src="./qr-slides.svg" class="absolute bottom-10 left-12 h-24 p-2 bg-white rounded-lg shadow-xl" alt="Slides" />
 
 ---
 layout: default
@@ -1497,9 +1497,13 @@ disabled: true
 
 ---
 layout: center
-class: text-center
+background: /background.webp
 ---
 
-# Merci !
-
-<img src="./qr-slides.svg" class="mt-8 mx-auto h-32" alt="Slides" />
+<div class="flex items-center justify-center gap-16">
+  <div class="text-center">
+    <h1 class="text-5xl font-bold">Merci !</h1>
+    <p class="opacity-60 mt-2 text-lg">Des questions ?</p>
+  </div>
+  <img src="./qr-slides.svg" class="h-40 p-3 bg-white rounded-xl shadow-xl" alt="Slides" />
+</div>
