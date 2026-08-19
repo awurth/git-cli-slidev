@@ -785,6 +785,24 @@ pick d4e5f6g Ajouter les tests
 #                    opens the editor
 # d, drop <commit> = remove commit
 ```
+```bash {5,6}
+$ git rebase -i HEAD~4
+# → dans l'éditeur :
+
+pick a1b2c3d Ajouter le formulaire de connexion
+pick d4e5f6g Ajouter les tests
+pick b2c3d4e WIP
+
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# d, drop <commit> = remove commit
+```
 ```bash
 $ git rebase -i HEAD~4
 # → dans l'éditeur :
