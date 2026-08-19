@@ -53,7 +53,7 @@ layout: default
 - **<Link to="historique">Réécrire l'historique</Link>** <span class="text-sm text-gray-400">— rebase -i, autoStash, update-refs, history</span>
 - **<Link to="pousser">Pousser</Link>** <span class="text-sm text-gray-400">— autoSetupRemote, force-with-lease</span>
 - **<Link to="conflits">Gérer les conflits</Link>** <span class="text-sm text-gray-400">— zdiff3, rerere</span>
-- **<Link to="config">Configurer son environnement</Link>** <span class="text-sm text-gray-400">— includeIf, config finale</span>
+- **<Link to="config">Configurer son environnement</Link>** <span class="text-sm text-gray-400">— info/exclude, includeIf, config finale</span>
 
 </v-clicks>
 
@@ -1376,6 +1376,33 @@ git config --global core.excludesFile ~/.gitignore_global
 Évite les PR polluées par des fichiers .DS_Store ou .idea.
 À faire une fois et ça s'applique à tous vos projets.
 -->
+
+---
+layout: default
+---
+
+# `.git/info/exclude`
+
+Ignorer des fichiers propres à ce dépôt, sans rien committer.
+
+<br>
+
+```bash
+$EDITOR .git/info/exclude
+```
+
+<br>
+
+<v-click>
+
+```
+# .git/info/exclude
+CLAUDE.md
+notes-perso.md
+*.tmp
+```
+
+</v-click>
 
 ---
 layout: default
